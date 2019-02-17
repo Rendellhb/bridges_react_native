@@ -36,8 +36,7 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* react_native_otakeysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* react_native_otakeysTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
-		5BFFE0E02EC0C7A85E23A3F5 /* libPods-react_native_otakeys-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 886771E1276CAD22B1679415 /* libPods-react_native_otakeys-tvOSTests.a */; };
-		68299EE4AA2894B32D211D82 /* libPods-react_native_otakeysTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3783FAA1995BB1C7E31D5023 /* libPods-react_native_otakeysTests.a */; };
+		7CAF3D5F389C6209C886D4F6 /* Pods_react_native_otakeys.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B76085D04E87631FD86BA /* Pods_react_native_otakeys.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		891027F22218CE98003284FD /* ModelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 891027F12218CE98003284FD /* ModelUtils.m */; };
 		895A34DE2217535000DD2DF7 /* OTASDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 895A34B02217535000DD2DF7 /* OTASDK.framework */; };
@@ -45,7 +44,6 @@
 		895A34E32217602A00DD2DF7 /* OTABridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 895A34E22217602A00DD2DF7 /* OTABridge.m */; };
 		895A34E9221799E900DD2DF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 895A34E8221799E900DD2DF7 /* CoreData.framework */; };
 		895A34EB221799F800DD2DF7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 895A34EA221799F700DD2DF7 /* CoreBluetooth.framework */; };
-		9BB165059C27A275E07F6D10 /* libPods-react_native_otakeys.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0958726FB77371851B70E1BB /* libPods-react_native_otakeys.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
@@ -351,7 +349,6 @@
 		00E356EE1AD99517003FC87E /* react_native_otakeysTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = react_native_otakeysTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* react_native_otakeysTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = react_native_otakeysTests.m; sourceTree = "<group>"; };
-		0958726FB77371851B70E1BB /* libPods-react_native_otakeys.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-react_native_otakeys.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* react_native_otakeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = react_native_otakeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -367,7 +364,7 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3017A26545A93EB1E2A81E79 /* Pods-react_native_otakeys.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_otakeys.release.xcconfig"; path = "Pods/Target Support Files/Pods-react_native_otakeys/Pods-react_native_otakeys.release.xcconfig"; sourceTree = "<group>"; };
 		3783FAA1995BB1C7E31D5023 /* libPods-react_native_otakeysTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-react_native_otakeysTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		428D6143238D5B2843650029 /* Pods-react_native_otakeys-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_otakeys-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-react_native_otakeys-tvOSTests/Pods-react_native_otakeys-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		489B76085D04E87631FD86BA /* Pods_react_native_otakeys.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_react_native_otakeys.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -380,12 +377,9 @@
 		895A34E8221799E900DD2DF7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		895A34EA221799F700DD2DF7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		B37088F993C4D943F6FB78CB /* Pods-react_native_otakeysTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_otakeysTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-react_native_otakeysTests/Pods-react_native_otakeysTests.release.xcconfig"; sourceTree = "<group>"; };
 		C846C5FF06B110AE9BF0DD9A /* Pods-react_native_otakeys.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_otakeys.debug.xcconfig"; path = "Pods/Target Support Files/Pods-react_native_otakeys/Pods-react_native_otakeys.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F8AC1E9EA10B9C370D78A086 /* Pods-react_native_otakeysTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_otakeysTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-react_native_otakeysTests/Pods-react_native_otakeysTests.debug.xcconfig"; sourceTree = "<group>"; };
-		FBA725D5BE03B2BD4087C44D /* Pods-react_native_otakeys-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_otakeys-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-react_native_otakeys-tvOSTests/Pods-react_native_otakeys-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,7 +388,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
-				68299EE4AA2894B32D211D82 /* libPods-react_native_otakeysTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,7 +411,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-				9BB165059C27A275E07F6D10 /* libPods-react_native_otakeys.a in Frameworks */,
+				7CAF3D5F389C6209C886D4F6 /* Pods_react_native_otakeys.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +436,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */,
-				5BFFE0E02EC0C7A85E23A3F5 /* libPods-react_native_otakeys-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,9 +571,9 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
-				0958726FB77371851B70E1BB /* libPods-react_native_otakeys.a */,
 				886771E1276CAD22B1679415 /* libPods-react_native_otakeys-tvOSTests.a */,
 				3783FAA1995BB1C7E31D5023 /* libPods-react_native_otakeysTests.a */,
+				489B76085D04E87631FD86BA /* Pods_react_native_otakeys.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -600,10 +592,6 @@
 			children = (
 				C846C5FF06B110AE9BF0DD9A /* Pods-react_native_otakeys.debug.xcconfig */,
 				3017A26545A93EB1E2A81E79 /* Pods-react_native_otakeys.release.xcconfig */,
-				FBA725D5BE03B2BD4087C44D /* Pods-react_native_otakeys-tvOSTests.debug.xcconfig */,
-				428D6143238D5B2843650029 /* Pods-react_native_otakeys-tvOSTests.release.xcconfig */,
-				F8AC1E9EA10B9C370D78A086 /* Pods-react_native_otakeysTests.debug.xcconfig */,
-				B37088F993C4D943F6FB78CB /* Pods-react_native_otakeysTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -687,12 +675,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "react_native_otakeysTests" */;
 			buildPhases = (
-				4B92E2FC5DBB86D424959817 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				847EC9BF2AB0955171DD5609 /* [CP] Embed Pods Frameworks */,
-				0D138E11EE4CB33F50C25D46 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -748,12 +733,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "react_native_otakeys-tvOSTests" */;
 			buildPhases = (
-				B6CD38372EC6FEA00C43A968 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
-				2B1BA41F818B82591B5169FC /* [CP] Embed Pods Frameworks */,
-				049985B481F92BEAF439DC45 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1178,51 +1160,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		049985B481F92BEAF439DC45 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-react_native_otakeys-tvOSTests/Pods-react_native_otakeys-tvOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0D138E11EE4CB33F50C25D46 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-react_native_otakeysTests/Pods-react_native_otakeysTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2B1BA41F818B82591B5169FC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-react_native_otakeys-tvOSTests/Pods-react_native_otakeys-tvOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1236,39 +1173,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		4B92E2FC5DBB86D424959817 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-react_native_otakeysTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		847EC9BF2AB0955171DD5609 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-react_native_otakeysTests/Pods-react_native_otakeysTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		A1B1B3C09F8300BD57B9D1C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1288,33 +1192,18 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B6CD38372EC6FEA00C43A968 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-react_native_otakeys-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C63F2F119FA6E1F7BD733F2B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-react_native_otakeys/Pods-react_native_otakeys-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1405,7 +1294,6 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F8AC1E9EA10B9C370D78A086 /* Pods-react_native_otakeysTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1427,7 +1315,6 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B37088F993C4D943F6FB78CB /* Pods-react_native_otakeysTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1557,7 +1444,6 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBA725D5BE03B2BD4087C44D /* Pods-react_native_otakeys-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1583,7 +1469,6 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 428D6143238D5B2843650029 /* Pods-react_native_otakeys-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

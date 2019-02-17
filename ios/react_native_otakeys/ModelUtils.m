@@ -10,31 +10,25 @@
 
 @implementation ModelUtils
 
-- (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestJson
+- (OTAKeyRequestBuilder *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestJson
 {
   NSData* data = [otaKeyRequestJson dataUsingEncoding:NSUTF8StringEncoding];
   
   NSError *error;
-  NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-  OTAKeyRequest *keyRequest;
+  NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+  OTAKeyRequestBuilder *keyRequest = [[OTAKeyRequestBuilder alloc] init];
   
-  NSString *string = [[json objectForKey:@"otaId"] stringValue];
-  if ([json isKindOfClass:[NSDictionary class]]){
-    NSArray *keyRequestArray = json[@"directory"];
-    if ([keyRequestArray isKindOfClass:[NSArray class]]){
-      for (NSDictionary *dictionary in keyRequestArray) {
-        keyRequest.otaId = [[dictionary objectForKey:@"otaId"] stringValue];
-        keyRequest.extId = [[dictionary objectForKey:@"extId"] stringValue];
-        keyRequest.beginDate = [self dateFromString:[[dictionary objectForKey:@"beginDate"] string]];
-        keyRequest.endDate = [self dateFromString:[[dictionary objectForKey:@"endDate"] string]];
-        keyRequest.vehicleId = [NSNumber numberWithInteger:[[dictionary objectForKey:@"vehicleId"] integerValue]];
-        keyRequest.vehicleExtId = [[dictionary objectForKey:@"vehicleExtId"] stringValue];
-        keyRequest.enableNow = [[dictionary objectForKey:@"enableNow"] boolValue];
-        keyRequest.tokenAmount = [NSNumber numberWithInteger:[[dictionary objectForKey:@"tokenAmount"] integerValue]];
-        keyRequest.singleShotSecurity = [[dictionary objectForKey:@"singleShotSecurity"] boolValue];
-        keyRequest.security = [[dictionary objectForKey:@"security"] stringValue];
-      }
-    }
+  if ([dictionary isKindOfClass:[NSDictionary class]]){
+      keyRequest.otaId = [dictionary objectForKey:@"otaId"];
+      keyRequest.extId = [dictionary objectForKey:@"extId"];
+      keyRequest.beginDate = [self dateFromString:[dictionary objectForKey:@"beginDate"]];
+      keyRequest.endDate = [self dateFromString:[dictionary objectForKey:@"endDate"]];
+      keyRequest.vehicleId = [NSNumber numberWithInteger:[[dictionary objectForKey:@"vehicleId"] integerValue]];
+      keyRequest.vehicleExtId = [dictionary objectForKey:@"vehicleExtId"];
+      keyRequest.enableNow = [[dictionary objectForKey:@"enableNow"] boolValue];
+      keyRequest.tokenAmount = [NSNumber numberWithInteger:[[dictionary objectForKey:@"tokenAmount"] integerValue]];
+      keyRequest.singleShotSecurity = [[dictionary objectForKey:@"singleShotSecurity"] boolValue];
+      keyRequest.security = [dictionary objectForKey:@"security"];
   }
   return keyRequest;
 }
@@ -177,14 +171,14 @@
 {
   // Convert string to date object
   NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-  [dateFormat setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+  [dateFormat setDateFormat:@"dd-MM-yyyy"];
   
   NSDate *date = [dateFormat dateFromString: dateString];
   
   return date;
 }
 
-- (NSString*) convertObjectToJson:(NSObject*) object
+- (NSString*) convertObjectToJson:(NSDictionary *) object
 {
   NSError *error = nil;
   
@@ -192,6 +186,39 @@
   NSString *result = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
   
   return result;
+}
+
+- (NSDictionary *) dictionaryWithPropertiesOfObject:(id)obj
+{
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  
+  unsigned count;
+  objc_property_t *properties = class_copyPropertyList([obj class], &count);
+  
+  for (int i = 0; i < count; i++) {
+    NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
+    if ([[obj valueForKey:key] isKindOfClass:[NSDate class]]) {
+      [dict setObject:[self changeDateToDateString: [obj valueForKey:key]] forKey:key];
+    } else {
+      [dict setObject:[obj valueForKey:key] forKey:key];
+    }
+  }
+  
+  free(properties);
+  
+  return dict;
+}
+
+- (NSString *) changeDateToDateString :(NSDate *) date {
+  
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+  NSLocale *locale = [NSLocale currentLocale];
+  NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd-MM-yyyy" options:0 locale:locale];
+  [dateFormatter setDateFormat:dateFormat];
+  [dateFormatter setLocale:locale];
+  NSString *dateString = [dateFormatter stringFromDate:date];
+  return dateString;
 }
 
 @end

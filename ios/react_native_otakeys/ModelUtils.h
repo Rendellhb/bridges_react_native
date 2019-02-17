@@ -15,6 +15,7 @@
 #import <OTASDK/OTALastVehicleSynthesisPublic.h>
 #import <OTASDK/OTAVehicleData.h>
 #import <OTASDK/OTAEnums.h>
+#import <objc/runtime.h>
 
 @class OTAKeyPublic;
 @class OTAKeyRequest;
@@ -34,5 +35,9 @@
 - (NSDate *)dateFromString:(NSString *) dateString;
 
 - (NSString *) convertObjectToJson:(NSObject *) object;
+
+- (NSDictionary *) dictionaryWithPropertiesOfObject:(id)obj;
+
+- (NSString *) changeDateToDateString :(NSDate *) date;
 
 @end

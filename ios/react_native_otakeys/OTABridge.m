@@ -82,13 +82,15 @@ RCT_EXPORT_METHOD(createKey: (NSString *) otaKeyRequestJSON
   ModelUtils *utils = [[ModelUtils alloc] init];
   OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
   
-  NSString *jsonresult = [utils convertObjectToJson:keyRequest];
-  
-  resolve(jsonresult);
-  
-//  [[OTAManager instance] createKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
-//    error == nil ? resolve(
-//  }]
+  [[OTAManager instance] createKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
+    if  (error == nil) {
+      NSDictionary *dic = [utils dictionaryWithPropertiesOfObject: keyPublic];
+      NSString *jsonresult = [utils convertObjectToJson:dic];
+      resolve(jsonresult);
+    } else {
+      reject(@"Error", @"Error creating key", error);
+    }
+  }];
 }
 
 RCT_EXPORT_METHOD(activateLogging: (BOOL *) activate
