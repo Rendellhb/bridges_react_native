@@ -7,6 +7,7 @@
 //
 
 #import "OTABridge.h"
+#import "ModelUtils.h"
 
 @implementation OTABridge
 
@@ -74,13 +75,20 @@ RCT_EXPORT_METHOD(accessDeviceTokenWithForceRefresh: (BOOL) forceRefresh
   result != nil && [result length] == 0 ? reject(@"Error", @"Error accessing device token with force refresh", nil) : resolve(result);
 }
 
-RCT_EXPORT_METHOD(createKey: (NSString *) otaKeyrequestJSON
+RCT_EXPORT_METHOD(createKey: (NSString *) otaKeyRequestJSON
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
-  [[OTAManager instance] createKey:(OTAKeyRequest *) otaKeyRequest completion:^(OTAKeyPublic * _Nullable, NSError * _Nullable) {
-    
-  }]
+  ModelUtils *utils = [[ModelUtils alloc] init];
+  OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  
+  NSString *jsonresult = [utils convertObjectToJson:keyRequest];
+  
+  resolve(jsonresult);
+  
+//  [[OTAManager instance] createKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
+//    error == nil ? resolve(
+//  }]
 }
 
 RCT_EXPORT_METHOD(activateLogging: (BOOL *) activate
