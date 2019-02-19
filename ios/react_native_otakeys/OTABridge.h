@@ -11,7 +11,6 @@
 #import <OTASDK/OTAEnums.h>
 #import <OTASDK/OTAErrors.h>
 #import <OTASDK/OTAKeyPublic.h>
-#import <OTASDK/OTAK
 
 @interface OTABridge : NSObject <RCTBridgeModule>
 @end

@@ -16,12 +16,13 @@ RCT_EXPORT_MODULE();
 
 /*
  The easiest way to start creating a bridge, send a string get it back and print
+ I left this one just for an example so you guys can use as a guide
  */
-RCT_EXPORT_METHOD(printSomething: (NSString *) name
+RCT_EXPORT_METHOD(printSomething: (NSString *) awesomeText
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
-  name != nil ? resolve(name) : reject(@"No name", @"Não passou nenhum nome", nil);
+  awesomeText != nil ? resolve(awesomeText) : reject(@"No text", @"C'mom gimme some text!", nil);
 }
 
 RCT_EXPORT_METHOD(openSessionWithToken: (NSString *) token
@@ -37,34 +38,42 @@ RCT_EXPORT_METHOD(openSessionWithToken: (NSString *) token
                                       }];
 }
 
-RCT_EXPORT_METHOD(authenticated: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(authenticated:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] authenticated] ? resolve(@YES) : reject(@"Error", @"Error get informed by authentication status", nil);
 }
 
 RCT_EXPORT_METHOD(configureWithAppId: (NSString *) appID
-                  SDKInstanceID: (NSString *) sdkInstanceID)
+                  SDKInstanceID: (NSString *) sdkInstanceID
+                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   
   [[OTAManager instance] configureWithAppId:(NSString *) appID
                               SDKInstanceID:(NSString *) sdkInstanceID];
+  resolve(@YES);
 }
 
-RCT_EXPORT_METHOD(closeSession: (NSNull *) null)
+RCT_EXPORT_METHOD(closeSession: (RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] closeSession];
+  resolve(@YES);
 }
 
 RCT_EXPORT_METHOD(switchToKeyWithID: (NSString *) otaKey
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
+  __block BOOL isResolved = NO;
   [[OTAManager instance] switchToKeyWithID:otaKey
-                           completionBlock:^(BOOL completed) {
-                             completed ? resolve(@YES) : reject(@"Error", @"Error switching to key with ID", nil);
-                           }];
+     completionBlock:^(BOOL completed) {
+       if (!isResolved) {
+         completed ? resolve(@YES) : reject(@"Error", @"Error switching to key with ID", nil);
+       }
+       isResolved = YES;
+     }];
 }
 
 RCT_EXPORT_METHOD(accessDeviceTokenWithForceRefresh: (BOOL) forceRefresh
@@ -80,7 +89,7 @@ RCT_EXPORT_METHOD(createKey: (NSString *) otaKeyRequestJSON
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
-  OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
   
   [[OTAManager instance] createKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
     if  (error == nil) {
@@ -99,7 +108,7 @@ RCT_EXPORT_METHOD(updateKey: (NSString *) otaKeyRequestJSON
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
-  OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
   
   [[OTAManager instance] updateKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
     if  (error == nil) {
@@ -108,7 +117,7 @@ RCT_EXPORT_METHOD(updateKey: (NSString *) otaKeyRequestJSON
       NSString *jsonresult = [utils convertObjectToJson:treatedDic];
       resolve(jsonresult);
     } else {
-      reject(@"Error", @"Error creating key", error);
+      reject(@"Error", @"Error updating key", error);
     }
   }];
 }
@@ -118,7 +127,7 @@ RCT_EXPORT_METHOD(enableKey: (NSString *) otaKeyRequestJSON
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
-  OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
   
   [[OTAManager instance] enableKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
     if  (error == nil) {
@@ -127,7 +136,7 @@ RCT_EXPORT_METHOD(enableKey: (NSString *) otaKeyRequestJSON
       NSString *jsonresult = [utils convertObjectToJson:treatedDic];
       resolve(jsonresult);
     } else {
-      reject(@"Error", @"Error creating key", error);
+      reject(@"Error", @"Error enabling key", error);
     }
   }];
 }
@@ -137,7 +146,7 @@ RCT_EXPORT_METHOD(endKey: (NSString *) otaKeyRequestJSON
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
-  OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
   
   [[OTAManager instance] endKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
     if  (error == nil) {
@@ -146,7 +155,7 @@ RCT_EXPORT_METHOD(endKey: (NSString *) otaKeyRequestJSON
       NSString *jsonresult = [utils convertObjectToJson:treatedDic];
       resolve(jsonresult);
     } else {
-      reject(@"Error", @"Error creating key", error);
+      reject(@"Error", @"Error ending key", error);
     }
   }];
 }
@@ -162,12 +171,11 @@ RCT_EXPORT_METHOD(endKeyWithId: (NSString *) keyID
     NSString *jsonresult = [utils convertObjectToJson:treatedDic];
     resolve(jsonresult);
   } failure:^(OTAErrorCode otaErrorCode, NSError *error) {
-    reject(@"Error", [NSString stringWithFormat:@"Error creating key: %li", otaErrorCode], error);
+    reject(@"Error", [NSString stringWithFormat:@"Error ending key with id: %li", otaErrorCode], error);
   }];
 }
 
-RCT_EXPORT_METHOD(keysWithSuccess: (NSString *) json
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(keysWithSuccess: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] keysWithSuccess:^(NSArray<OTAKeyPublic *> *otaKeyPublicArray) {
@@ -183,12 +191,11 @@ RCT_EXPORT_METHOD(keysWithSuccess: (NSString *) json
     NSString *json = [utils getJsonFromNSArray: dicArray];
     resolve(json);
   } failure:^(OTAErrorCode otaErrorCode, NSError *error) {
-    reject(@"Error", [NSString stringWithFormat:@"Error creating key: %li", otaErrorCode], error);
+    reject(@"Error", [NSString stringWithFormat:@"Error keys without success: %li", otaErrorCode], error);
   }];
 }
 
-RCT_EXPORT_METHOD(scanForVehicleWithCompletion: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(scanForVehicleWithCompletion :(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] scanForVehicleWithCompletion:^(NSError *error) {
@@ -206,15 +213,13 @@ RCT_EXPORT_METHOD(scanForVehicleWithTimeout: (NSUInteger *) timeoutInSeconds
                                         }];
 }
 
-RCT_EXPORT_METHOD(connectToVehicle: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(connectToVehicle:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] connectToVehicle];
 }
 
-RCT_EXPORT_METHOD(connectToVehicleWithCompletion: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(connectToVehicleWithCompletion: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] connectToVehicleWithCompletion:^(NSError *error) {
@@ -231,23 +236,20 @@ RCT_EXPORT_METHOD(connectToVehicleWithTimeout: (NSUInteger *) timeoutInSeconds
   }];
 }
 
-RCT_EXPORT_METHOD(connectedToVehicle: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(connectedToVehicle: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] connectedToVehicle] ? resolve(@YES) : reject(@"Error", @"Error getting information about vehicle connectivity", nil);
 }
 
-RCT_EXPORT_METHOD(currentConnectionStatus: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(currentConnectionStatus: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   OTABLEConnectionStatus *status = [[OTAManager instance] currentConnectionStatus];
-  resolve([NSString stringWithFormat:@"%s", status]);
+  resolve([NSString stringWithFormat:@"%li", (long)status]);
 }
 
-RCT_EXPORT_METHOD(disconnectFromVehicle: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(disconnectFromVehicle: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] disconnectFromVehicle];
@@ -259,13 +261,13 @@ RCT_EXPORT_METHOD(unlockDoorsWithRequestVehicleData: (BOOL *) requestVehicleData
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] unlockDoorsWithRequestVehicleData:requestVehicleData enableEngine:enableEngine
-                                                   success:^(OTAVehicleData *vehicleData) {
-                                                     ModelUtils *utils = [[ModelUtils alloc] init];
-                                                     NSDictionary *dic = [utils dictionaryWithPropertiesOfObject:vehicleData];
-                                                     resolve([utils getJsonFromNSDictionary: dic]);
-                                                   } failure:^(OTAVehicleData *otaVehicleData, OTABLEErrorCode otableErrorCode, NSError *error) {
-                                                     reject(@"Error", [NSString stringWithFormat: @"Unable to unlock doors with request data: %li", (long)otableErrorCode], error);
-                                                   }];
+     success:^(OTAVehicleData *vehicleData) {
+       ModelUtils *utils = [[ModelUtils alloc] init];
+       NSDictionary *dic = [utils dictionaryWithPropertiesOfObject:vehicleData];
+       resolve([utils getJsonFromNSDictionary: dic]);
+     } failure:^(OTAVehicleData *otaVehicleData, OTABLEErrorCode otableErrorCode, NSError *error) {
+       reject(@"Error", [NSString stringWithFormat: @"Unable to unlock doors with request data: %li", (long)otableErrorCode], error);
+     }];
 }
 
 RCT_EXPORT_METHOD(lockDoorsWithRequestVehicleData: (BOOL *) requestVehicleData
@@ -281,8 +283,7 @@ RCT_EXPORT_METHOD(lockDoorsWithRequestVehicleData: (BOOL *) requestVehicleData
   }];
 }
 
-RCT_EXPORT_METHOD(vehicleDataWithSuccess: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(vehicleDataWithSuccess: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] vehicleDataWithSuccess:^(OTAVehicleData *vehicleData) {
@@ -294,8 +295,7 @@ RCT_EXPORT_METHOD(vehicleDataWithSuccess: (NSNull *) null
   }];
 }
 
-RCT_EXPORT_METHOD(lastVehicleSynthesisWithSuccess: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(lastVehicleSynthesisWithSuccess: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] lastVehicleSynthesisWithSuccess:^(OTALastVehicleSynthesisPublic *lastVehicleSynthesis) {
@@ -307,10 +307,12 @@ RCT_EXPORT_METHOD(lastVehicleSynthesisWithSuccess: (NSNull *) null
   }];
 }
 
-RCT_EXPORT_METHOD(lastVehicleSynthesis: (OTAKeyRequest *) keyRequest
+RCT_EXPORT_METHOD(lastVehicleSynthesis: (NSString *) keyRequestJson
                   findEventsWithResolver:(RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
+  ModelUtils *utils = [[ModelUtils alloc] init];
+  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:keyRequestJson];
   [[OTAManager instance] lastVehicleSynthesis:(OTAKeyRequest *)keyRequest success:^(OTALastVehicleSynthesisPublic *lastVehicleSynthesis) {
     ModelUtils *utils = [[ModelUtils alloc] init];
     NSDictionary *dic = [utils resolveOTALastVehicleSynthesisPublic:lastVehicleSynthesis];
@@ -442,7 +444,7 @@ RCT_EXPORT_METHOD(generateTokens: (NSString *) otaKeyRequestJSON
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
-  OTAKeyRequest *keyRequest = [[[ModelUtils alloc] init] getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
   
   [[OTAManager instance] generateTokens:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
     if  (error == nil) {
@@ -455,8 +457,7 @@ RCT_EXPORT_METHOD(generateTokens: (NSString *) otaKeyRequestJSON
   }];
 }
 
-RCT_EXPORT_METHOD(localKeys: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(localKeys: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSArray *array = [[OTAManager instance] localKeys];
@@ -472,8 +473,7 @@ RCT_EXPORT_METHOD(localKeys: (NSNull *) null
   resolve([utils getJsonFromNSArray: dicArray]);
 }
 
-RCT_EXPORT_METHOD(localKey: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(localKey: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
@@ -483,8 +483,7 @@ RCT_EXPORT_METHOD(localKey: (NSNull *) null
   resolve([utils getJsonFromNSDictionary: dic]);
 }
 
-RCT_EXPORT_METHOD(currentKey: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(currentKey: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
@@ -494,8 +493,7 @@ RCT_EXPORT_METHOD(currentKey: (NSNull *) null
   resolve([utils getJsonFromNSDictionary: dic]);
 }
 
-RCT_EXPORT_METHOD(syncVehicleDataWithSuccess: (NSNull *) null
-                  findEventsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(syncVehicleDataWithSuccess: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] syncVehicleDataWithSuccess:^(BOOL success){
