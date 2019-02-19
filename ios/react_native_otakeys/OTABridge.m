@@ -522,4 +522,21 @@ RCT_EXPORT_METHOD(localKeyWithCompletionBlock: (NSString *) otaKeyJSON
   }];
 }
 
+RCT_EXPORT_METHOD(getAccessDeviceToken:
+                  (RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+  resolve(@[OTAManager.instance.accessDeviceToken]);
+  //    RCTLogInfo(@"OTASDK VERSION: %@ at %@", OTAManager.versionNumber, location);
+}
+
+RCT_EXPORT_METHOD(isAuthenticated:
+                  (RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+  resolve([NSNumber numberWithBool:OTAManager.instance.authenticated]);
+  //    RCTLogInfo(@"OTASDK VERSION: %@ at %@", OTAManager.versionNumber, location);
+}
+
+
 @end
