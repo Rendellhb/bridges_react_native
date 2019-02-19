@@ -520,85 +520,116 @@ export default class App extends Component {
         <View style={styles.container}>
           <Text style={styles.title}>Funcionalidades do OTAManager</Text>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="openSessionWithToken" 
-              onPress={this.openSessionWithToken} />
+            <Button
+              color="white"
+              title="openSessionWithToken"
+              onPress={this.openSessionWithToken}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="authenticated" 
-              onPress={this.authenticated} />
+            <Button
+              color="white"
+              title="authenticated"
+              onPress={this.authenticated}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="configureWithAppId" 
-              onPress={this.configureWithAppId} />
+            <Button
+              color="white"
+              title="configureWithAppId"
+              onPress={this.configureWithAppId}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="closeSession" 
-              onPress={this.closeSession} />
+            <Button
+              color="white"
+              title="closeSession"
+              onPress={this.closeSession}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="switchToKeyWithID" 
-              onPress={this.switchToKeyWithID} />
+            <Button
+              color="white"
+              title="switchToKeyWithID"
+              onPress={this.switchToKeyWithID}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="accessDeviceTokenWithForceRefresh" 
-              onPress={this.accessDeviceTokenWithForceRefresh} />
+            <Button
+              color="white"
+              title="accessDeviceTokenWithForceRefresh"
+              onPress={this.accessDeviceTokenWithForceRefresh}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="createKey" 
-              onPress={this.createKey} />
+            <Button
+              color="white"
+              title="createKey"
+              onPress={this.createKey}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="updateKey" 
-              onPress={this.updateKey} />
+            <Button
+              color="white"
+              title="updateKey"
+              onPress={this.updateKey}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="enableKey" 
-              onPress={this.enableKey} />
+            <Button
+              color="white"
+              title="enableKey"
+              onPress={this.enableKey}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="endKey" 
-              onPress={this.endKey} />
+            <Button
+              color="white"
+              title="endKey"
+              onPress={this.endKey}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="endKeyWithId" 
-              onPress={this.endKeyWithId} />
+            <Button
+              color="white"
+              title="endKeyWithId"
+              onPress={this.endKeyWithId}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="keysWithSuccess" 
-              onPress={this.keysWithSuccess} />
+            <Button
+              color="white"
+              title="keysWithSuccess"
+              onPress={this.keysWithSuccess}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="scanForVehicleWithCompletion" 
-              onPress={this.scanForVehicleWithCompletion} />
+            <Button
+              color="white"
+              title="scanForVehicleWithCompletion"
+              onPress={this.scanForVehicleWithCompletion}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="scanForVehicleWithTimeout" 
-              onPress={this.scanForVehicleWithTimeout} />
+            <Button
+              color="white"
+              title="scanForVehicleWithTimeout"
+              onPress={this.scanForVehicleWithTimeout}
+            />
           </View>
           <View style={styles.buttonbg}>
-            <Button color="white" 
-              title="connectToVehicle" 
-              onPress={this.connectToVehicle} />
+            <Button
+              color="white"
+              title="connectToVehicle"
+              onPress={this.connectToVehicle}
+            />
           </View>
           <View style={styles.buttonbg}>
             <Button
               color="white"
               title="connectToVehicleWithCompletion"
-              onPress={this.connectToVehicleWithCompletion}/>
+              onPress={this.connectToVehicleWithCompletion}
+            />
           </View>
           <View style={styles.buttonbg}>
             <Button
@@ -722,7 +753,7 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="white"
-              title="unnamedAction5WithRequestVehicleData" 
+              title="unnamedAction5WithRequestVehicleData"
               onPress={this.unnamedAction5WithRequestVehicleData}
             />
           </View>
