@@ -26,7 +26,11 @@
 
 - (OTAKeyPublic *) getOTAKeyPublicObjectFromJson: (NSString *)otaKeyPublicJson;
 
+- (NSArray<OTAKeyPublic *> *) getOTAKeyPublicArrayFromJson:(NSString *) otaKeyPublicObjectJson;
+
 - (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestJson;
+
+- (NSArray *)getOTAKeyRequestArrayFromJson: (NSString *) otaKeyRequestsJson;
 
 - (OTAKeyRequestBuilder *) getOTAKeyRequestBuilderFromJson: (NSString *) otaKeyRequestBuilder;
 
@@ -39,5 +43,13 @@
 - (NSDictionary *) dictionaryWithPropertiesOfObject:(id)obj;
 
 - (NSString *) changeDateToDateString :(NSDate *) date;
+
+- (NSString *) getJsonFromNSArray: (NSArray *) array;
+
+- (NSString *) getJsonFromNSDictionary: (NSDictionary *) dictionary;
+
+- (NSDictionary *) resolveOTAKeyPublicDictionary: (NSDictionary *) dictionary;
+
+- (NSDictionary *) resolveOTALastVehicleSynthesisPublic: (OTALastVehicleSynthesisPublic *) lastVehicleSynthesis;
 
 @end
