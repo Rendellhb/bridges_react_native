@@ -96,7 +96,10 @@
   return nil;
 }
 
-
+- (NSDate *) dateFromIntTimestap: (NSNumber *) timestamp
+{
+  return [NSDate dateWithTimeIntervalSince1970:[timestamp doubleValue]];
+}
 
 - (NSDate *) dateFromString:(NSString *) dateString
 {
@@ -142,15 +145,7 @@
 
 - (NSString *) changeDateToDateString: (NSDate *) date
 {
-  
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
-  NSLocale *locale = [NSLocale currentLocale];
-  NSString *dateFormat = [NSDateFormatter dateFormatFromTemplate:@"dd-MM-yyyy" options:0 locale:locale];
-  [dateFormatter setDateFormat:dateFormat];
-  [dateFormatter setLocale:locale];
-  NSString *dateString = [dateFormatter stringFromDate:date];
-  return dateString;
+  return [NSString stringWithFormat:@"%.0f", date.timeIntervalSince1970];
 }
 
 - (NSString *) getJsonFromNSArray: (NSArray *) array
@@ -172,8 +167,8 @@
   OTAKeyRequestBuilder *keyRequest = [[OTAKeyRequestBuilder alloc] init];
   keyRequest.otaId = [dictionary objectForKey:@"otaId"];
   keyRequest.extId = [dictionary objectForKey:@"extId"];
-  keyRequest.beginDate = [self dateFromString:[dictionary objectForKey:@"beginDate"]];
-  keyRequest.endDate = [self dateFromString:[dictionary objectForKey:@"endDate"]];
+  keyRequest.beginDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"beginDate"] integerValue]]];
+  keyRequest.endDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"endDate"] integerValue]]];
   keyRequest.vehicleId = [NSNumber numberWithInteger:[[dictionary objectForKey:@"vehicleId"] integerValue]];
   keyRequest.vehicleExtId = [dictionary objectForKey:@"vehicleExtId"];
   keyRequest.enableNow = [[dictionary objectForKey:@"enableNow"] boolValue];
@@ -189,8 +184,8 @@
   OTAKeyPublic *otaKeyPublic = [[OTAKeyPublic alloc] init];
   otaKeyPublic.extId = [dictionary objectForKey:@"extId"];
   otaKeyPublic.otaId = [dictionary objectForKey:@"otaId"];
-  otaKeyPublic.beginDate = [self dateFromString: [dictionary objectForKey:@"beginDate"]];
-  otaKeyPublic.endDate = [self dateFromString: [dictionary objectForKey:@"endDate"]];
+  otaKeyPublic.beginDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"beginDate"] integerValue]]];
+  otaKeyPublic.endDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"endDate"] integerValue]]];
   otaKeyPublic.enabled = [[dictionary objectForKey:@"enabled"] boolValue];
   otaKeyPublic.mileageLimit = [NSNumber numberWithInteger:[[dictionary objectForKey:@"mileageLimit"] integerValue]];
   otaKeyPublic.singleShotSecurity = [[dictionary objectForKey:@"singleShotSecurity"] boolValue];
@@ -230,7 +225,7 @@
 {
   OTAVehicleData *otaVehicleData = [[OTAVehicleData alloc] init];
   otaVehicleData = [[OTAVehicleData alloc] init];
-  otaVehicleData.date = [self dateFromString:[dictionary objectForKey:@"date"]];
+  otaVehicleData.date = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"date"] integerValue]]];
   otaVehicleData.mileageStart = [NSNumber numberWithInteger:[[dictionary objectForKey:@"mileageStart"] integerValue]];
   otaVehicleData.mileageCurrent = [NSNumber numberWithInteger:[[dictionary objectForKey:@"mileageCurrent"] integerValue]];
   otaVehicleData.doorsState = [[dictionary objectForKey:@"doorsState"] boolValue];
@@ -245,13 +240,13 @@
   otaVehicleData.gpsLatitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"gpsLatitude"] integerValue]];
   otaVehicleData.gpsLongitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"gpsLongitude"] integerValue]];
   otaVehicleData.gpsAccuracy = [NSNumber numberWithInteger:[[dictionary objectForKey:@"gpsAccuracy"] integerValue]];
-  otaVehicleData.gpsCaptureDate = [self dateFromString:[dictionary objectForKey:@"gpsCaptureDate"]];
+  otaVehicleData.gpsCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"gpsCaptureDate"] integerValue]]];
   otaVehicleData.gprsLatitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"gprsLatitude"] integerValue]];
   otaVehicleData.gprsLongitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"gprsLongitude"] integerValue]];
-  otaVehicleData.gprsLastCaptureDate = [self dateFromString:[dictionary objectForKey:@"gprsLastCaptureDate"]];
-  otaVehicleData.gprsInitialCaptureDate = [self dateFromString:[dictionary objectForKey:@"gprsInitialCaptureDate"]];
-  otaVehicleData.lastMileageCaptureDate = [self dateFromString:[dictionary objectForKey:@"lastMileageCaptureDate"]];
-  otaVehicleData.lastEnergyCaptureDate = [self dateFromString:[dictionary objectForKey:@"lastEnergyCaptureDate"]];
+  otaVehicleData.gprsLastCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"gprsLastCaptureDate"] integerValue]]];
+  otaVehicleData.gprsInitialCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"gprsInitialCaptureDate"] integerValue]]];
+  otaVehicleData.lastMileageCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"lastMileageCaptureDate"] integerValue]]];
+  otaVehicleData.lastEnergyCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"lastEnergyCaptureDate"] integerValue]]];
   
   OTAFuelUnit fueltUnit = [[dictionary objectForKey:@"fuelUnit"] integerValue];
   otaVehicleData.fuelUnit = fueltUnit;
@@ -273,7 +268,7 @@
   otaVehicleData.sdkGpsLatitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"sdkGpsLatitude"] integerValue]];
   otaVehicleData.sdkGpsLongitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"sdkGpsLongitude"] integerValue]];
   otaVehicleData.sdkGpsAccuracy = [NSNumber numberWithInteger:[[dictionary objectForKey:@"sdkGpsAccuracy"] integerValue]];
-  otaVehicleData.sdkGpsCaptureDate = [self dateFromString:[dictionary objectForKey:@"sdkGpsCaptureDate"]];
+  otaVehicleData.sdkGpsCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"sdkGpsCaptureDate"] integerValue]]];
   
   return otaVehicleData;
 }
@@ -281,7 +276,7 @@
 - (OTALastVehicleSynthesisPublic *) getOTALastVehicleSynthesisPublicFromDictionary: (NSDictionary *) dictionary
 {
   OTALastVehicleSynthesisPublic *lastVehicleSynthesisPublic = [[OTALastVehicleSynthesisPublic alloc] init];
-  lastVehicleSynthesisPublic.lastCaptureDate = [self dateFromString:[dictionary objectForKey:@"lastCaptureDate"]];
+  lastVehicleSynthesisPublic.lastCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"lastCaptureDate"] integerValue]]];
   
   OTALastVehicleSynthesisGpsCoordinatesPublic *lastVehicleSynthesisGpsCoordinatesPublic = [self getOTALastVehicleSynthesisGpsCoordinatePublicFromDictionary: [dictionary objectForKey:@"gpsCoordinates"]];
   lastVehicleSynthesisPublic.gpsCoordinates = lastVehicleSynthesisGpsCoordinatesPublic;
@@ -290,9 +285,9 @@
   lastVehicleSynthesisPublic.doorsState = doorsState;
   
   lastVehicleSynthesisPublic.engineRunning = [[dictionary objectForKey:@"engineRunning"] boolValue];
-  lastVehicleSynthesisPublic.lastMileageCaptureDate = [self dateFromString:[dictionary objectForKey:@"lastMileageCaptureDate"]];
+  lastVehicleSynthesisPublic.lastMileageCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"lastMileageCaptureDate"] integerValue]]];
   lastVehicleSynthesisPublic.mileage = [NSNumber numberWithInteger:[[dictionary objectForKey:@"mileage"] integerValue]];
-  lastVehicleSynthesisPublic.lastEnergyCaptureDate = [self dateFromString:[dictionary objectForKey:@"lastEnergyCaptureDate"]];
+  lastVehicleSynthesisPublic.lastEnergyCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[dictionary objectForKey:@"lastEnergyCaptureDate"]]];
   lastVehicleSynthesisPublic.energyLevel = [NSNumber numberWithInteger:[[dictionary objectForKey:@"energyLevel"] integerValue]];
   lastVehicleSynthesisPublic.batteryVoltage = [NSNumber numberWithInteger:[[dictionary objectForKey:@"batteryVoltage"] integerValue]];
   lastVehicleSynthesisPublic.connectedToCharger = [[dictionary objectForKey:@"connectedToCharger"] boolValue];
@@ -315,8 +310,8 @@
 - (OTALastVehicleSynthesisGpsCoordinatesPublic *) getOTALastVehicleSynthesisGpsCoordinatePublicFromDictionary: (NSDictionary *) dictionary
 {
   OTALastVehicleSynthesisGpsCoordinatesPublic *lastVehicleSynthesisGpsCoordinatesPublic = [[OTALastVehicleSynthesisGpsCoordinatesPublic alloc] init];
-  lastVehicleSynthesisGpsCoordinatesPublic.initialCaptureDate = [self dateFromString:[dictionary objectForKey:@"initialCaptureDate"]];
-  lastVehicleSynthesisGpsCoordinatesPublic.lastCaptureDate = [self dateFromString:[dictionary objectForKey:@"lastCaptureDate"]];
+  lastVehicleSynthesisGpsCoordinatesPublic.initialCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"initialCaptureDate"] integerValue]]];
+  lastVehicleSynthesisGpsCoordinatesPublic.lastCaptureDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"lastCaptureDate"] integerValue]]];
   lastVehicleSynthesisGpsCoordinatesPublic.latitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"latitude"] integerValue]];
   lastVehicleSynthesisGpsCoordinatesPublic.longitude = [NSNumber numberWithInteger:[[dictionary objectForKey:@"longitude"] integerValue]];
   return lastVehicleSynthesisGpsCoordinatesPublic;
