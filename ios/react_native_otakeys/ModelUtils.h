@@ -30,8 +30,6 @@
 
 - (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestJson;
 
-- (NSArray *)getOTAKeyRequestArrayFromJson: (NSString *) otaKeyRequestsJson;
-
 - (OTAKeyRequestBuilder *) getOTAKeyRequestBuilderFromJson: (NSString *) otaKeyRequestBuilder;
 
 - (OTALastVehicleSynthesisGpsCoordinatesPublic *) getOTALastVehicleSynthesisGpsCoordinatesPublicFromJson: (NSString *) otaLastVehicleSynthesisGpsCoordinatesPublic;

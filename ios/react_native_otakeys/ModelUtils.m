@@ -10,30 +10,16 @@
 
 @implementation ModelUtils
 
-- (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestJson
+- (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestBuilderJson
 {
-  NSData* data = [otaKeyRequestJson dataUsingEncoding:NSUTF8StringEncoding];
+  NSData* data = [otaKeyRequestBuilderJson dataUsingEncoding:NSUTF8StringEncoding];
   
   NSError *error;
-  NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+  __block NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
   
-  return [self getOTAKeyRequestFromDictionary: dictionary];
-}
-
-- (NSArray *)getOTAKeyRequestArrayFromJson: (NSString *) otaKeyRequestsJson
-{
-  NSData* data = [otaKeyRequestsJson dataUsingEncoding:NSUTF8StringEncoding];
-  
-  NSError *error;
-  NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-  NSMutableArray *otaKeyRequests = [[NSMutableArray alloc] init];
-  
-  for (NSDictionary *dictionary in jsonArray) {
-    if ([dictionary isKindOfClass:[NSDictionary class]])
-    [otaKeyRequests addObject:[self getOTAKeyRequestFromDictionary: dictionary]];
-  }
-  
-  return otaKeyRequests;
+  return [OTAKeyRequest makeWithBuilder:^(OTAKeyRequestBuilder *builder) {
+    builder = [self getOTAKeyRequestFromDictionary: dictionary];
+  }];
 }
 
 - (OTAKeyPublic *) getOTAKeyPublicObjectFromJson:(NSString *) otaKeyPublicObjectJson
@@ -181,9 +167,9 @@
   return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-- (OTAKeyRequest *) getOTAKeyRequestFromDictionary: (NSDictionary *) dictionary
+- (OTAKeyRequestBuilder *) getOTAKeyRequestFromDictionary: (NSDictionary *) dictionary
 {
-  OTAKeyRequest *keyRequest = [[OTAKeyRequest alloc] init];
+  OTAKeyRequestBuilder *keyRequest = [[OTAKeyRequestBuilder alloc] init];
   keyRequest.otaId = [dictionary objectForKey:@"otaId"];
   keyRequest.extId = [dictionary objectForKey:@"extId"];
   keyRequest.beginDate = [self dateFromString:[dictionary objectForKey:@"beginDate"]];
