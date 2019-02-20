@@ -82,8 +82,8 @@ export default class App extends Component {
     this.otaKeyRequest = {
       otaId: '1',
       extId: '1',
-      beginDate: '01-03-2019',
-      endDate: '01-03-2019',
+      beginDate: 1550685803,
+      endDate: 1550685803,
       vehicleId: '1',
       vehicleExtId: '1',
       enableNow: true,
@@ -189,9 +189,19 @@ export default class App extends Component {
     }
   }
 
-  createKey() {
+  async createKey() {
     try {
-      const result = NativeModules.OTABridge.createKey(JSON.stringify(this.otaKeyRequest));
+      const otaKeyRequest = {
+        otaId: '1',
+        extId: '1',
+        beginDate: 1550685803,
+        endDate: 1550685803,
+        vehicleId: '1',
+        vehicleExtId: '1',
+        singleShotSecurity: true,
+        security: 'token'
+      };
+      const result = await NativeModules.OTABridge.createKey(JSON.stringify(otaKeyRequest));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);

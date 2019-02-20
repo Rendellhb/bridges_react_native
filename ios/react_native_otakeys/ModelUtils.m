@@ -165,16 +165,16 @@
 - (OTAKeyRequestBuilder *) getOTAKeyRequestFromDictionary: (NSDictionary *) dictionary
 {
   OTAKeyRequestBuilder *keyRequest = [[OTAKeyRequestBuilder alloc] init];
-  keyRequest.otaId = [dictionary objectForKey:@"otaId"];
-  keyRequest.extId = [dictionary objectForKey:@"extId"];
+  keyRequest.otaId = [dictionary objectForKey:@"otaId"] ? [dictionary objectForKey:@"otaId"] : 0;
+  keyRequest.extId = [dictionary objectForKey:@"extId"] ? [dictionary objectForKey:@"extId"] : 0;
   keyRequest.beginDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"beginDate"] integerValue]]];
   keyRequest.endDate = [self dateFromIntTimestap:[NSNumber numberWithInteger:[[dictionary objectForKey:@"endDate"] integerValue]]];
   keyRequest.vehicleId = [NSNumber numberWithInteger:[[dictionary objectForKey:@"vehicleId"] integerValue]];
-  keyRequest.vehicleExtId = [dictionary objectForKey:@"vehicleExtId"];
-  keyRequest.enableNow = [[dictionary objectForKey:@"enableNow"] boolValue];
-  keyRequest.tokenAmount = [NSNumber numberWithInteger:[[dictionary objectForKey:@"tokenAmount"] integerValue]];
-  keyRequest.singleShotSecurity = [[dictionary objectForKey:@"singleShotSecurity"] boolValue];
-  keyRequest.security = [dictionary objectForKey:@"security"];
+  keyRequest.vehicleExtId = [dictionary objectForKey:@"vehicleExtId"] ? [dictionary objectForKey:@"vehicleExtId"] : 0;
+  keyRequest.enableNow = [[dictionary objectForKey:@"enableNow"] boolValue] ? [[dictionary objectForKey:@"enableNow"] boolValue] : false;
+  keyRequest.tokenAmount = [NSNumber numberWithInteger:[[dictionary objectForKey:@"tokenAmount"] integerValue]] ? [NSNumber numberWithInteger:[[dictionary objectForKey:@"tokenAmount"] integerValue]] : 0;
+  keyRequest.singleShotSecurity = [[dictionary objectForKey:@"singleShotSecurity"] boolValue] ? [[dictionary objectForKey:@"singleShotSecurity"] boolValue] : false;
+  keyRequest.security = [dictionary objectForKey:@"security"] ? [dictionary objectForKey:@"security"] : @"";
   
   return keyRequest;
 }

@@ -28,7 +28,7 @@
 
 - (NSArray<OTAKeyPublic *> *) getOTAKeyPublicArrayFromJson:(NSString *) otaKeyPublicObjectJson;
 
-- (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestJson;
+- (OTAKeyRequest *) getOTAKeyRequestObjectFromJson: (NSString *) otaKeyRequestBuilderJson;
 
 - (OTAKeyRequestBuilder *) getOTAKeyRequestBuilderFromJson: (NSString *) otaKeyRequestBuilder;
 
@@ -49,5 +49,7 @@
 - (NSDictionary *) resolveOTAKeyPublicDictionary: (NSDictionary *) dictionary;
 
 - (NSDictionary *) resolveOTALastVehicleSynthesisPublic: (OTALastVehicleSynthesisPublic *) lastVehicleSynthesis;
+
+- (OTAKeyRequestBuilder *) getOTAKeyRequestFromDictionary: (NSDictionary *) dictionary;
 
 @end

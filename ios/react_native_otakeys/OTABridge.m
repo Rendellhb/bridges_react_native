@@ -89,7 +89,26 @@ RCT_EXPORT_METHOD(createKey: (NSString *) otaKeyRequestJSON
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   ModelUtils *utils = [[ModelUtils alloc] init];
-  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+//  OTAKeyRequest *keyRequest = [utils getOTAKeyRequestObjectFromJson:otaKeyRequestJSON];
+  
+  NSData* data = [otaKeyRequestJSON dataUsingEncoding:NSUTF8StringEncoding];
+  
+  NSError *error;
+  __block NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+  
+  OTAKeyRequest *keyRequest = [OTAKeyRequest makeWithBuilder:^(OTAKeyRequestBuilder *builder) {
+    OTAKeyRequestBuilder *krBuilder = [utils getOTAKeyRequestFromDictionary: dictionary];
+    builder.otaId = krBuilder.otaId;
+    builder.extId = krBuilder.extId;
+    builder.beginDate = krBuilder.beginDate;
+    builder.endDate = krBuilder.endDate;
+    builder.vehicleId = krBuilder.vehicleId;
+    builder.vehicleExtId = krBuilder.vehicleExtId;
+    builder.enableNow = krBuilder.enableNow;
+    builder.tokenAmount = krBuilder.tokenAmount;
+    builder.singleShotSecurity = krBuilder.singleShotSecurity;
+    builder.security = krBuilder.security;
+  }];
   
   [[OTAManager instance] createKey:(OTAKeyRequest *) keyRequest completion:^(OTAKeyPublic * keyPublic, NSError * error) {
     if  (error == nil) {
