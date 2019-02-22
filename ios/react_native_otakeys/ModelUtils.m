@@ -131,10 +131,12 @@
   
   for (int i = 0; i < count; i++) {
     NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
-    if ([[obj valueForKey:key] isKindOfClass:[NSDate class]]) {
-      [dict setObject:[self changeDateToDateString: [obj valueForKey:key]] forKey:key];
-    } else {
-      [dict setObject:[obj valueForKey:key] forKey:key];
+    if ([obj valueForKey:key] != nil) {
+      if ([[obj valueForKey:key] isKindOfClass:[NSDate class]]) {
+        [dict setObject:[self changeDateToDateString: [obj valueForKey:key]] forKey:key];
+      } else {
+        [dict setObject:[obj valueForKey:key] forKey:key];
+      }
     }
   }
   
