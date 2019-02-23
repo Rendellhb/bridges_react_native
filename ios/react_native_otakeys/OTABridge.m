@@ -476,7 +476,9 @@ RCT_EXPORT_METHOD(generateTokens: (NSString *) otaKeyRequestJSON
   }];
 }
 
-RCT_EXPORT_METHOD(localKeys: (RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(localKeys: (NSInteger *) id
+                  withExtId: (NSString *) extId
+                  findEventsWithResolver: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSArray *array = [[OTAManager instance] localKeys];
@@ -548,8 +550,7 @@ RCT_EXPORT_METHOD(getAccessDeviceToken:
   resolve([OTAManager instance].accessDeviceToken);
 }
 
-RCT_EXPORT_METHOD(isAuthenticated:
-                  (RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(isAuthenticated: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   resolve([NSNumber numberWithBool:[OTAManager instance].authenticated]);

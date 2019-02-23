@@ -20,7 +20,7 @@ import {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    // this.state = { something: '' };
+    this.state = { something: '' };
 
     this.lastVehicleSynthesisObj = {
       lastCaptureDate: '01-01-2001',
@@ -124,16 +124,16 @@ export default class App extends Component {
     The easiest way to start creating a bridge, send a string get it back and print
     I left this one just for an example so you guys can use as a guide
   */
-  // async printAwesometext() {
-  //   try {
-  //     const something1 = await NativeModules.OTABridge.printSomething('something');
-  //     this.setState(() => ({
-  //       something: something1
-  //     }));
-  //   } catch (e) {
-  //     console.log(`Erro do OTA ${e}`);
-  //   }
-  // }
+  async printAwesometext() {
+    try {
+      const something1 = await NativeModules.OTABridge.printSomething('Funcionalidades do OTAManager');
+      this.setState(() => ({
+        something: something1
+      }));
+    } catch (e) {
+      console.log(`Erro do OTA ${e}`);
+    }
+  }
 
   async openSessionWithToken() {
     try {
@@ -524,301 +524,301 @@ export default class App extends Component {
   }
 
   render() {
-    // this.printAwesometext();
+    this.printAwesometext();
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>Funcionalidades do OTAManager</Text>
+          <Text style={styles.title}>{this.state.something}</Text>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="openSessionWithToken"
               onPress={this.openSessionWithToken}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="authenticated"
               onPress={this.authenticated}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="configureWithAppId"
               onPress={this.configureWithAppId}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="closeSession"
               onPress={this.closeSession}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="switchToKeyWithID"
               onPress={this.switchToKeyWithID}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="accessDeviceTokenWithForceRefresh"
               onPress={this.accessDeviceTokenWithForceRefresh}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="createKey"
               onPress={this.createKey}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="updateKey"
               onPress={this.updateKey}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="enableKey"
               onPress={this.enableKey}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="endKey"
               onPress={this.endKey}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="endKeyWithId"
               onPress={this.endKeyWithId}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="keysWithSuccess"
               onPress={this.keysWithSuccess}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="scanForVehicleWithCompletion"
               onPress={this.scanForVehicleWithCompletion}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="scanForVehicleWithTimeout"
               onPress={this.scanForVehicleWithTimeout}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="connectToVehicle"
               onPress={this.connectToVehicle}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="connectToVehicleWithCompletion"
               onPress={this.connectToVehicleWithCompletion}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="connectToVehicleWithTimeout"
               onPress={this.connectToVehicleWithTimeout}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="connectedToVehicle"
               onPress={this.connectedToVehicle}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="currentConnectionStatus"
               onPress={this.currentConnectionStatus}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="currentConnectionStatus"
               onPress={this.currentConnectionStatus}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="disconnectFromVehicle"
               onPress={this.disconnectFromVehicle}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unlockDoorsWithRequestVehicleData"
               onPress={this.unlockDoorsWithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="lockDoorsWithRequestVehicleData"
               onPress={this.lockDoorsWithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="vehicleDataWithSuccess"
               onPress={this.vehicleDataWithSuccess}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="lastVehicleSynthesisWithSuccess"
               onPress={this.lastVehicleSynthesisWithSuccess}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="lastVehicleSynthesis"
               onPress={this.lastVehicleSynthesis}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="lastVehicleSynthesisForKeyWithId"
               onPress={this.lastVehicleSynthesisForKeyWithId}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="enableEngineWithRequestVehicleData"
               onPress={this.enableEngineWithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="disableEngineWithRequestVehicleData"
               onPress={this.disableEngineWithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unnamedAction1WithRequestVehicleData"
               onPress={this.unnamedAction1WithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unnamedAction2WithRequestVehicleData"
               onPress={this.unnamedAction2WithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unnamedAction3WithRequestVehicleData"
               onPress={this.unnamedAction3WithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unnamedAction4WithRequestVehicleData"
               onPress={this.unnamedAction4WithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unnamedAction5WithRequestVehicleData"
               onPress={this.unnamedAction5WithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="unnamedAction6WithRequestVehicleData"
               onPress={this.unnamedAction6WithRequestVehicleData}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="generateTokens"
               onPress={this.generateTokens}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="localKeys"
               onPress={this.localKeys}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="localKey"
               onPress={this.localKey}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="currentKey"
               onPress={this.currentKey}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="syncVehicleDataWithSuccess"
               onPress={this.syncVehicleDataWithSuccess}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="activateLogging"
               onPress={this.activateLogging}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
-              color="white"
+              color="lightBlue"
               title="localKeyWithCompletionBlock"
               onPress={this.localKeyWithCompletionBlock}
             />
