@@ -82,6 +82,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
       promise.reject("error", "C'mom gimme some text!");
   }
 
+  //Only Android
   @ReactMethod
   public void configureEnvironment(String url, Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -95,6 +96,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void getAccessDeviceToken(Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -102,6 +104,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void accessDeviceTokenWithForceRefresh(boolean forceReload, Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -131,6 +134,8 @@ public class OTABridge extends ReactContextBaseJavaModule {
         });
       }
    */
+
+  // Only Android
   @ReactMethod
   public void openSession(String otaSessionRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -149,6 +154,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void createKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -166,6 +172,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void authenticated(Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -176,6 +183,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void enableKey(String otaKeyRequestJson, final Promise promise) {
     if(OTASDKUtils.isSdkReady()) {
@@ -193,6 +201,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void generateTokens(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -210,6 +219,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void updateKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -227,6 +237,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void endKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -244,6 +255,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void getKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -261,6 +273,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void keysWithSuccess(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -278,6 +291,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void syncVehicleDataWithSuccess(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -295,6 +309,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void registerBleEvents(int id, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && context instanceof MainActivity) {
@@ -302,6 +317,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void scan(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -319,6 +335,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void stopScanning(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -327,6 +344,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void connect(boolean showNotification, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -344,6 +362,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void disconnect(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -361,6 +380,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unlockDoorsWithRequestVehicleData(boolean requesVehicleData, boolean authStart, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -373,6 +393,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void lockDoorsWithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -385,6 +406,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void enableEngineWithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -402,6 +424,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void disableEngineWithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -419,6 +442,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void getVehicleData(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -431,6 +455,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unnamedAction1WithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -449,6 +474,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unnamedAction2WithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -467,6 +493,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unnamedAction3WithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -485,6 +512,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unnamedAction4WithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -503,6 +531,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unnamedAction5WithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -521,6 +550,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void unnamedAction6WithRequestVehicleData(boolean requestVehicleData, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -539,6 +569,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void connectedToVehicle(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -546,6 +577,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void getBluetoothState(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -553,6 +585,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void isOperationInProgress(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -560,6 +593,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void setNfcEnabled(boolean enabled, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -568,6 +602,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void getLastNfcData(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -585,6 +620,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void registerNfcEvent(int id, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -602,12 +638,14 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void unregisterNfcEvent(int id, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null)
       promise.resolve(getOtaSdk().unregisterNfcEvent(id));
   }
 
+  //Only Android
   @ReactMethod
   public void getVehicleDataHistory(String otaKeyJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -621,6 +659,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void localKeys(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -632,6 +671,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void localKey(long id, String extId, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -641,6 +681,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void isAuthenticated(Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -648,6 +689,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void vehicleDataWithSuccess(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -659,6 +701,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void lastVehicleSynthesisWithSuccess(String otaKeyJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -671,6 +714,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void configureNetworkTimeouts(int connectTimeout, int readTimeout, Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -678,6 +722,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void switchToKeyWithId(String otaKeyId, final Promise promise) {
     OtaKey otaKey = new OtaKey();
@@ -692,6 +737,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //iOS and Android
   @ReactMethod
   public void currentKey(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -703,6 +749,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void getRemainingTokenAmount(String otaKeyJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -711,6 +758,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void cleanTokens(String otaKeyJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
@@ -719,6 +767,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
     }
   }
 
+  //Only Android
   @ReactMethod
   public void enablePhoneGpsPosition(boolean enable) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {

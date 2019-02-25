@@ -135,6 +135,15 @@ export default class App extends Component {
     }
   }
 
+  async getAccessDeviceToken() {
+    try {
+      const result = await NativeModules.OTABridge.getAccessDeviceToken();
+      console.log(result);
+    } catch (e) {
+      console.log(`Erro do OTA ${e}`);
+    }
+  }
+
   async openSessionWithToken() {
     try {
       const result = await NativeModules.OTABridge.openSessionWithToken('VCpCTVlS3P535Y7ZpGjE0YGJ91dfgqRA');
@@ -302,6 +311,15 @@ export default class App extends Component {
   connectedToVehicle() {
     try {
       const result = NativeModules.OTABridge.connectedToVehicle();
+      console.log(`SUCESSO: ${result}`);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  isAuthenticated() {
+    try {
+      const result = NativeModules.OTABridge.isAuthenticated();
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -529,39 +547,14 @@ export default class App extends Component {
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.title}>{this.state.something}</Text>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="openSessionWithToken"
-              onPress={this.openSessionWithToken}
-            />
+          <View style={styles.container}>
+            <Text style={styles.subtitle}>Métodos iOS/Android</Text>
           </View>
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="authenticated"
-              onPress={this.authenticated}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="configureWithAppId"
-              onPress={this.configureWithAppId}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="closeSession"
-              onPress={this.closeSession}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="switchToKeyWithID"
-              onPress={this.switchToKeyWithID}
+              title="getAccessDeviceToken"
+              onPress={this.getAccessDeviceToken}
             />
           </View>
           <View style={styles.buttonbg}>
@@ -581,8 +574,8 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="updateKey"
-              onPress={this.updateKey}
+              title="authenticated"
+              onPress={this.authenticated}
             />
           </View>
           <View style={styles.buttonbg}>
@@ -595,15 +588,22 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="endKey"
-              onPress={this.endKey}
+              title="generateTokens"
+              onPress={this.generateTokens}
             />
           </View>
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="endKeyWithId"
-              onPress={this.endKeyWithId}
+              title="updateKey"
+              onPress={this.updateKey}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="endKey"
+              onPress={this.endKey}
             />
           </View>
           <View style={styles.buttonbg}>
@@ -616,64 +616,8 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="scanForVehicleWithCompletion"
-              onPress={this.scanForVehicleWithCompletion}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="scanForVehicleWithTimeout"
-              onPress={this.scanForVehicleWithTimeout}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="connectToVehicle"
-              onPress={this.connectToVehicle}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="connectToVehicleWithCompletion"
-              onPress={this.connectToVehicleWithCompletion}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="connectToVehicleWithTimeout"
-              onPress={this.connectToVehicleWithTimeout}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="connectedToVehicle"
-              onPress={this.connectedToVehicle}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="currentConnectionStatus"
-              onPress={this.currentConnectionStatus}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="currentConnectionStatus"
-              onPress={this.currentConnectionStatus}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="disconnectFromVehicle"
-              onPress={this.disconnectFromVehicle}
+              title="syncVehicleDataWithSuccess"
+              onPress={this.syncVehicleDataWithSuccess}
             />
           </View>
           <View style={styles.buttonbg}>
@@ -777,13 +721,6 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="generateTokens"
-              onPress={this.generateTokens}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
               title="localKeys"
               onPress={this.localKeys}
             />
@@ -805,8 +742,102 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="syncVehicleDataWithSuccess"
-              onPress={this.syncVehicleDataWithSuccess}
+              title="connectedToVehicle"
+              onPress={this.connectedToVehicle}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="isAuthenticated"
+              onPress={this.isAuthenticated}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="switchToKeyWithID"
+              onPress={this.switchToKeyWithID}
+            />
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.subtitle}>Métodos iOS exclusivo</Text>
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="openSessionWithToken"
+              onPress={this.openSessionWithToken}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="configureWithAppId"
+              onPress={this.configureWithAppId}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="closeSession"
+              onPress={this.closeSession}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="endKeyWithId"
+              onPress={this.endKeyWithId}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="scanForVehicleWithCompletion"
+              onPress={this.scanForVehicleWithCompletion}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="scanForVehicleWithTimeout"
+              onPress={this.scanForVehicleWithTimeout}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="connectToVehicle"
+              onPress={this.connectToVehicle}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="connectToVehicleWithCompletion"
+              onPress={this.connectToVehicleWithCompletion}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="connectToVehicleWithTimeout"
+              onPress={this.connectToVehicleWithTimeout}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="currentConnectionStatus"
+              onPress={this.currentConnectionStatus}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="disconnectFromVehicle"
+              onPress={this.disconnectFromVehicle}
             />
           </View>
           <View style={styles.buttonbg}>
@@ -821,6 +852,135 @@ export default class App extends Component {
               color="lightBlue"
               title="localKeyWithCompletionBlock"
               onPress={this.localKeyWithCompletionBlock}
+            />
+          </View>
+          <View style={styles.container}>
+            <Text style={styles.subtitle}>Métodos Android exclusivo</Text>
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="getKey"
+              onPress={this.getKey}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="registerBleEvents"
+              onPress={this.registerBleEvents}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="scan"
+              onPress={this.scan}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="stopScanning"
+              onPress={this.stopScanning}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="connect"
+              onPress={this.connect}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="disconnect"
+              onPress={this.disconnect}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="getVehicleData"
+              onPress={this.getVehicleData}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="getBluetoothState"
+              onPress={this.getBluetoothState}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="isOperationInProgress"
+              onPress={this.isOperationInProgress}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="setNfcEnabled"
+              onPress={this.setNfcEnabled}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="getLastNfcData"
+              onPress={this.getLastNfcData}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="registerNfcEvent"
+              onPress={this.registerNfcEvent}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="unregisterNfcEvent"
+              onPress={this.unregisterNfcEvent}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="getVehicleDataHistory"
+              onPress={this.getVehicleDataHistory}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="configureNetworkTimeouts"
+              onPress={this.configureNetworkTimeouts}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="getRemainingTokenAmount"
+              onPress={this.getRemainingTokenAmount}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="cleanTokens"
+              onPress={this.cleanTokens}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="enablePhoneGpsPosition"
+              onPress={this.enablePhoneGpsPosition}
             />
           </View>
         </View>
