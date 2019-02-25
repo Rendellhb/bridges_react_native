@@ -58,8 +58,8 @@ public class OTABridge extends ReactContextBaseJavaModule {
   }
 
   private OtaKeysService getOtaSdk() {
-    if (context instanceof  MainActivity) {
-      return ((MainActivity) context).getOtaKeysService();
+    if (getCurrentActivity() instanceof  MainActivity) {
+      return ((MainActivity) getCurrentActivity()).getOtaKeysService();
     }
 
     return null;
@@ -186,7 +186,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
   //iOS and Android
   @ReactMethod
   public void enableKey(String otaKeyRequestJson, final Promise promise) {
-    if(OTASDKUtils.isSdkReady()) {
+    if(OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
       getOtaSdk().enableKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new EnableKeyCallback() {
         @Override
         public void onEnableKey(OtaKey otaKey) {
