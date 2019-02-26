@@ -302,7 +302,8 @@ RCT_EXPORT_METHOD(lockDoorsWithRequestVehicleData: (BOOL *) requestVehicleData
   }];
 }
 
-RCT_EXPORT_METHOD(vehicleDataWithSuccess: (RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(vehicleDataWithSuccess: (NSString *) otaKeyJson
+                  findEventsWithResolver: (RCTPromiseResolveBlock)resolve
                   rejecter:(RCTPromiseRejectBlock)reject)
 {
   [[OTAManager instance] vehicleDataWithSuccess:^(OTAVehicleData *vehicleData) {

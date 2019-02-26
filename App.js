@@ -17,7 +17,7 @@ import {
   NativeModules
 } from 'react-native';
 
-const lastVehicleSynthesisObj = {
+const lastVehicleSynthesis = {
   lastCaptureDate: '01-01-2001',
   gpsCoordinates: {
     initialCaptureDate: '01-01-2001',
@@ -108,31 +108,15 @@ const otaKeyPublic = {
     enabled: true,
     engine: 'engine',
     mileageOffset: '123',
-    vehicleData: this.vehicleData
+    vehicleData
   },
-  lastVehicleSynthesis: this.lasVehicleSynthesisObj
+  lastVehicleSynthesis
 };
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = { something: '' };
-  }
-
-  /*
-                      ****** UNCOMENT FOR LEARNING PURPOSES ******
-    The easiest way to start creating a bridge, send a string get it back and print
-    I left this one just for an example so you guys can use as a guide
-  */
-  async printAwesometext() {
-    try {
-      const something1 = await NativeModules.OTABridge.printSomething('Funcionalidades do OTAManager');
-      this.setState(() => ({
-        something: something1
-      }));
-    } catch (e) {
-      console.log(`Erro do OTA ${e}`);
-    }
   }
 
   async getAccessDeviceToken() {
@@ -363,7 +347,7 @@ export default class App extends Component {
 
   lastVehicleSynthesisWithSuccess() {
     try {
-      const result = NativeModules.OTABridge.lastVehicleSynthesisWithSuccess();
+      const result = NativeModules.OTABridge.lastVehicleSynthesisWithSuccess(otaKeyPublic);
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -410,7 +394,7 @@ export default class App extends Component {
   unnamedAction1WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction1WithRequestVehicleData(JSON.stringify(true));
+        .unnamedAction1WithRequestVehicleData(true);
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -420,7 +404,7 @@ export default class App extends Component {
   unnamedAction2WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction2WithRequestVehicleData(JSON.stringify(false));
+        .unnamedAction2WithRequestVehicleData(false);
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -440,7 +424,7 @@ export default class App extends Component {
   unnamedAction4WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction4WithRequestVehicleData(JSON.stringify(false));
+        .unnamedAction4WithRequestVehicleData(false);
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -450,7 +434,7 @@ export default class App extends Component {
   unnamedAction5WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction5WithRequestVehicleData(JSON.stringify(true));
+        .unnamedAction5WithRequestVehicleData(true);
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -460,7 +444,7 @@ export default class App extends Component {
   unnamedAction6WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction6WithRequestVehicleData(JSON.stringify(false));
+        .unnamedAction6WithRequestVehicleData(false);
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -531,12 +515,29 @@ export default class App extends Component {
     }
   }
 
+  /*
+                      ****** UNCOMENT FOR LEARNING PURPOSES ******
+    The easiest way to start creating a bridge, send a string get it back and print
+    I left this one just for an example so you guys can use as a guide
+  */
+  async printAwesometext() {
+    try {
+      const something1 = await NativeModules.OTABridge.printSomething('Funcionalidades do OTAManager');
+      this.setState(() => ({
+        something: something1
+      }));
+    } catch (e) {
+      console.log(`Erro do OTA ${e}`);
+    }
+  }
+
   render() {
     this.printAwesometext();
+    const { something } = this.state;
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>{this.state.something}</Text>
+          <Text style={styles.title}>{something}</Text>
           <View style={styles.container}>
             <Text style={styles.subtitle}>Métodos iOS/Android</Text>
           </View>

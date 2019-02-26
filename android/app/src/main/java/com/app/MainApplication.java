@@ -64,7 +64,7 @@ public class MainApplication extends Application implements ReactApplication, Ot
   private void configureOTASDKNotification(Context context) {
     this.notification = new Notification.Builder(this).build();
 
-    final Intent intent = MainActivity.getCallingIntent(context);
+    final Intent intent = MainActivity.getCallingIntent();
     intent.addCategory(Intent.CATEGORY_DEFAULT);
     PendingIntent pendingIntent = PendingIntent.getActivity(context,
             NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -43,7 +43,7 @@ public class MainActivity extends ReactActivity implements BleListener {
     return mOtaKeysService;
   }
 
-  public static Intent getCallingIntent(Context context) {
+  public static Intent getCallingIntent() {
     return callingIntent != null ? callingIntent : new Intent();
   }
 
