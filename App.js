@@ -18,18 +18,18 @@ import {
 } from 'react-native';
 
 const lastVehicleSynthesis = {
-  lastCaptureDate: '01-01-2001',
+  lastCaptureDate: 1550685803,
   gpsCoordinates: {
-    initialCaptureDate: '01-01-2001',
-    lastCaptureDate: '01-01-2001',
+    initialCaptureDate: 1550685803,
+    lastCaptureDate: 1550685803,
     latitude: -9873.084,
     longitude: 727734.09884,
   },
   doorsState: 1,
   engineRunning: true,
-  lastMileageCaptureDate: '01-01-2001',
+  lastMileageCaptureDate: 1550685803,
   mileage: 234,
-  lastEnergyCaptureDate: '01-01-2001',
+  lastEnergyCaptureDate: 1550685803,
   energyLevel: 2,
   batteryVoltage: 12,
   connectedToCharger: false,
@@ -41,7 +41,7 @@ const lastVehicleSynthesis = {
 };
 
 const vehicleData = {
-  date: '01-03-2018',
+  date: 1550685803,
   mileageStart: 23784,
   mileageCurrent: 893795,
   connectedToLoader: true,
@@ -53,13 +53,13 @@ const vehicleData = {
   gpsLatitude: -9873.084,
   gpsLongitude: 727734.09884,
   gpsAccuracy: 30,
-  gpsCaptureDate: '03-03-2008',
+  gpsCaptureDate: 1550685803,
   gprsLatitude: 8374,
   gprsLongitude: 9264,
-  gprsLastCaptureDate: '05-09-1990',
-  gprsInitialCaptureDate: '03-03-1990',
-  lastMileageCaptureDate: '05-09-1990',
-  lastEnergyCaptureDate: '05-09-1990',
+  gprsLastCaptureDate: 1550685803,
+  gprsInitialCaptureDate: 1550685803,
+  lastMileageCaptureDate: 1550685803,
+  lastEnergyCaptureDate: 1550685803,
   fuelUnit: 1,
   odometerUnit: 1,
   synthesisVersion: 2,
@@ -71,7 +71,7 @@ const vehicleData = {
   sdkGpsLatitude: 773,
   sdkGpsLongitude: 97623,
   sdkGpsAccuracy: 823664,
-  sdkGpsCaptureDate: '01-01-2001'
+  sdkGpsCaptureDate: 1550685803
 };
 
 const otaKeyRequest = {
@@ -90,8 +90,8 @@ const otaKeyRequest = {
 const otaKeyPublic = {
   otaId: '1',
   extId: '1',
-  beginDate: '01-03-2019',
-  endDate: '01-03-2019',
+  beginDate: 1550685803,
+  endDate: 1550685803,
   enabled: true,
   mileageLimit: '16',
   singleShotSecurity: true,
@@ -122,6 +122,7 @@ export default class App extends Component {
   async getAccessDeviceToken() {
     try {
       const result = await NativeModules.OTABridge.getAccessDeviceToken();
+      console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
@@ -131,6 +132,7 @@ export default class App extends Component {
   async openSessionWithToken() {
     try {
       const result = await NativeModules.OTABridge.openSessionWithToken('VCpCTVlS3P535Y7ZpGjE0YGJ91dfgqRA');
+      console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
@@ -140,6 +142,7 @@ export default class App extends Component {
   async authenticated() {
     try {
       const result = await NativeModules.OTABridge.authenticated();
+      console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
@@ -149,6 +152,7 @@ export default class App extends Component {
   async configureWithAppId() {
     try {
       const result = await NativeModules.OTABridge.configureWithAppId('appId', 'sdkInstanceId');
+      console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
@@ -158,6 +162,7 @@ export default class App extends Component {
   async closeSession() {
     try {
       const result = await NativeModules.OTABridge.closeSession();
+      console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
@@ -176,6 +181,7 @@ export default class App extends Component {
   async accessDeviceTokenWithForceRefresh() {
     try {
       const result = await NativeModules.OTABridge.accessDeviceTokenWithForceRefresh(false);
+      console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
@@ -185,116 +191,129 @@ export default class App extends Component {
   async createKey() {
     try {
       const result = await NativeModules.OTABridge.createKey(JSON.stringify(otaKeyRequest));
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  updateKey() {
+  async updateKey() {
     try {
-      const result = NativeModules.OTABridge.updateKey(JSON.stringify(otaKeyRequest));
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.updateKey(JSON.stringify(otaKeyRequest));
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  enableKey() {
+  async enableKey() {
     try {
-      const result = NativeModules.OTABridge.enableKey(JSON.stringify(otaKeyRequest));
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.enableKey(JSON.stringify(otaKeyRequest));
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  endKey() {
+  async endKey() {
     try {
-      const result = NativeModules.OTABridge.endKey(JSON.stringify(otaKeyRequest));
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.endKey(JSON.stringify(otaKeyRequest));
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  endKeyWithId() {
+  async endKeyWithId() {
     try {
-      const result = NativeModules.OTABridge.endKeyWithId('keyID');
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.endKeyWithId('keyID');
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  keysWithSuccess() {
+  async keysWithSuccess() {
     try {
-      const result = NativeModules.OTABridge.keysWithSuccess();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.keysWithSuccess();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
 
-  scanForVehicleWithCompletion() {
+  async scanForVehicleWithCompletion() {
     try {
-      const result = NativeModules.OTABridge.scanForVehicleWithCompletion();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.scanForVehicleWithCompletion();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  scanForVehicleWithTimeout() {
+  async scanForVehicleWithTimeout() {
     try {
-      const result = NativeModules.OTABridge.scanForVehicleWithTimeout(30);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.scanForVehicleWithTimeout(30);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  connectToVehicle() {
+  async connectToVehicle() {
     try {
-      const result = NativeModules.OTABridge.connectToVehicle();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.connectToVehicle();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  connectToVehicleWithCompletion() {
+  async connectToVehicleWithCompletion() {
     try {
-      const result = NativeModules.OTABridge.connectToVehicleWithCompletion();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.connectToVehicleWithCompletion();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  connectToVehicleWithTimeout() {
+  async connectToVehicleWithTimeout() {
     try {
-      const result = NativeModules.OTABridge.connectToVehicleWithTimeout(30);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.connectToVehicleWithTimeout(30);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  connectedToVehicle() {
+  async connectedToVehicle() {
     try {
-      const result = NativeModules.OTABridge.connectedToVehicle();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.connectedToVehicle();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  isAuthenticated() {
+  async isAuthenticated() {
     try {
-      const result = NativeModules.OTABridge.isAuthenticated();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.isAuthenticated();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
@@ -303,213 +322,429 @@ export default class App extends Component {
   async currentConnectionStatus() {
     try {
       const result = await NativeModules.OTABridge.currentConnectionStatus();
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  disconnectFromVehicle() {
+  async disconnectFromVehicle() {
     try {
-      const result = NativeModules.OTABridge.disconnectFromVehicle();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.disconnectFromVehicle();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unlockDoorsWithRequestVehicleData() {
+  async unlockDoorsWithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge.unlockDoorsWithRequestVehicleData(true, true);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.unlockDoorsWithRequestVehicleData(true, true);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  lockDoorsWithRequestVehicleData() {
+  async lockDoorsWithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge.lockDoorsWithRequestVehicleData(true);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.lockDoorsWithRequestVehicleData(true);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  vehicleDataWithSuccess() {
+  async vehicleDataWithSuccess() {
     try {
-      const result = NativeModules.OTABridge.vehicleDataWithSuccess();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.vehicleDataWithSuccess();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  lastVehicleSynthesisWithSuccess() {
+  async lastVehicleSynthesisWithSuccess() {
     try {
-      const result = NativeModules.OTABridge.lastVehicleSynthesisWithSuccess(otaKeyPublic);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.lastVehicleSynthesisWithSuccess(JSON.stringify(otaKeyPublic));
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  lastVehicleSynthesis() {
+  async lastVehicleSynthesis() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .lastVehicleSynthesis(JSON.stringify(otaKeyRequest));
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  lastVehicleSynthesisForKeyWithId() {
+  async lastVehicleSynthesisForKeyWithId() {
     try {
-      const result = NativeModules.OTABridge.lastVehicleSynthesisForKeyWithId('keyId');
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.lastVehicleSynthesisForKeyWithId('keyId');
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  enableEngineWithRequestVehicleData() {
+  async enableEngineWithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge.enableEngineWithRequestVehicleData(true);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.enableEngineWithRequestVehicleData(true);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  disableEngineWithRequestVehicleData() {
+  async disableEngineWithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge.disableEngineWithRequestVehicleData(true);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.disableEngineWithRequestVehicleData(true);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unnamedAction1WithRequestVehicleData() {
+  async unnamedAction1WithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .unnamedAction1WithRequestVehicleData(true);
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unnamedAction2WithRequestVehicleData() {
+  async unnamedAction2WithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .unnamedAction2WithRequestVehicleData(false);
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unnamedAction3WithRequestVehicleData() {
+  async unnamedAction3WithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .unnamedAction3WithRequestVehicleData(JSON.stringify(true));
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unnamedAction4WithRequestVehicleData() {
+  async unnamedAction4WithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .unnamedAction4WithRequestVehicleData(false);
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unnamedAction5WithRequestVehicleData() {
+  async unnamedAction5WithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .unnamedAction5WithRequestVehicleData(true);
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  unnamedAction6WithRequestVehicleData() {
+  async unnamedAction6WithRequestVehicleData() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .unnamedAction6WithRequestVehicleData(false);
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  generateTokens() {
+  async generateTokens() {
     try {
-      const result = NativeModules.OTABridge.generateTokens(JSON.stringify(otaKeyRequest));
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.generateTokens(JSON.stringify(otaKeyRequest));
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  localKeys() {
+  async localKeys() {
     try {
-      const result = NativeModules.OTABridge.localKeys();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.localKeys(1234567890, '1');
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  localKey() {
+  async localKey() {
     try {
-      const result = NativeModules.OTABridge.localKey();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.localKey();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  currentKey() {
+  async currentKey() {
     try {
-      const result = NativeModules.OTABridge.currentKey();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.currentKey();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  syncVehicleDataWithSuccess() {
+  async syncVehicleDataWithSuccess() {
     try {
-      const result = NativeModules.OTABridge.syncVehicleDataWithSuccess();
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.syncVehicleDataWithSuccess();
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  activateLogging() {
+  async activateLogging() {
     try {
-      const result = NativeModules.OTABridge.activateLogging(true);
-      console.log(`SUCESSO: ${result}`);
+      const result = await NativeModules.OTABridge.activateLogging(true);
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
   }
 
-  localKeyWithCompletionBlock() {
+  async localKeyWithCompletionBlock() {
     try {
-      const result = NativeModules.OTABridge
+      const result = await NativeModules.OTABridge
         .localKeyWithCompletionBlock(JSON.stringify(otaKeyPublic));
-      console.log(`SUCESSO: ${result}`);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async getKey() {
+    try {
+      const result = await NativeModules.OTABridge.getKey(JSON.stringify(otaKeyRequest));
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async registerBleEvents() {
+    try {
+      const result = await NativeModules.OTABridge.registerBleEvents(30);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async scan() {
+    try {
+      const result = await NativeModules.OTABridge.scan();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async stopScanning() {
+    try {
+      const result = await NativeModules.OTABridge.stopScanning();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async connect() {
+    try {
+      const result = await NativeModules.OTABridge.connect(true);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async disconnect() {
+    try {
+      const result = await NativeModules.OTABridge.disconnect();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async getVehicleData() {
+    try {
+      const result = await NativeModules.OTABridge.getVehicleData();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async getBluetoothState() {
+    try {
+      const result = await NativeModules.OTABridge.getBluetoothState();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async isOperationInProgress() {
+    try {
+      const result = await NativeModules.OTABridge.isOperationInProgress();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async setNfcEnabled() {
+    try {
+      const result = await NativeModules.OTABridge.setNfcEnabled(true);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async getLastNfcData() {
+    try {
+      const result = await NativeModules.OTABridge.getLastNfcData();
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async registerNfcEvent() {
+    try {
+      const result = await NativeModules.OTABridge.registerNfcEvent(12356);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async unregisterNfcEvent() {
+    try {
+      const result = await NativeModules.OTABridge.unregisterNfcEvent(12356);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async getVehicleDataHistory() {
+    try {
+      const result = await NativeModules.OTABridge
+        .getVehicleDataHistory(JSON.stringify(otaKeyPublic));
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async configureNetworkTimeouts() {
+    try {
+      const result = await NativeModules.OTABridge.configureNetworkTimeouts(3, 8);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async getRemainingTokenAmount() {
+    try {
+      const result = await NativeModules.OTABridge
+        .getRemainingTokenAmount(JSON.stringify(otaKeyPublic));
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async cleanTokens() {
+    try {
+      const result = await NativeModules.OTABridge
+        .cleanTokens(JSON.stringify(otaKeyPublic));
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async enablePhoneGpsPosition() {
+    try {
+      const result = await NativeModules.OTABridge.enablePhoneGpsPosition(true);
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`ERRO: ${e}`);
+    }
+  }
+
+  async configureEnvironment() {
+    try {
+      const result = await NativeModules.OTABridge.configureEnvironment('http://url.com.br');
+      console.log('SUCESSO:');
+      console.log(result);
     } catch (e) {
       console.log(`ERRO: ${e}`);
     }
@@ -642,20 +877,6 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
-              title="lastVehicleSynthesis"
-              onPress={this.lastVehicleSynthesis}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="lastVehicleSynthesisForKeyWithId"
-              onPress={this.lastVehicleSynthesisForKeyWithId}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
               title="enableEngineWithRequestVehicleData"
               onPress={this.enableEngineWithRequestVehicleData}
             />
@@ -753,6 +974,20 @@ export default class App extends Component {
           </View>
           <View style={styles.container}>
             <Text style={styles.subtitle}>Métodos iOS exclusivo</Text>
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="lastVehicleSynthesis"
+              onPress={this.lastVehicleSynthesis}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
+              title="lastVehicleSynthesisForKeyWithId"
+              onPress={this.lastVehicleSynthesisForKeyWithId}
+            />
           </View>
           <View style={styles.buttonbg}>
             <Button

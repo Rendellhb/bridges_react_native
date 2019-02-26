@@ -661,7 +661,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
 
   //iOS and Android
   @ReactMethod
-  public void localKeys(final Promise promise) {
+  public void localKey(final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
       List<OtaKey> otaKeys = getOtaSdk().getLocalKeys();
       if (otaKeys != null || !otaKeys.isEmpty())
@@ -673,9 +673,9 @@ public class OTABridge extends ReactContextBaseJavaModule {
 
   //iOS and Android
   @ReactMethod
-  public void localKey(long id, String extId, final Promise promise) {
+  public void localKeys(int id, String extId, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      OtaKey key = getOtaSdk().getOtaKey(id, extId);
+      OtaKey key = getOtaSdk().getOtaKey((long) id, extId);
       if (key != null)
         promise.resolve(OTASDKUtils.getJsonFromOtaKey(key));
     }
@@ -724,7 +724,7 @@ public class OTABridge extends ReactContextBaseJavaModule {
 
   //iOS and Android
   @ReactMethod
-  public void switchToKeyWithId(String otaKeyId, final Promise promise) {
+  public void switchToKeyWithID(String otaKeyId, final Promise promise) {
     OtaKey otaKey = new OtaKey();
     otaKey.setOtaId(Long.getLong(otaKeyId));
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
