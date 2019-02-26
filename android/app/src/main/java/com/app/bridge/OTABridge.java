@@ -2,6 +2,8 @@ package com.app.bridge;
 
 import android.content.Context;
 
+import com.app.MainActivity;
+import com.app.Utils.OTASDKUtils;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -43,8 +45,6 @@ import com.otakeys.sdk.service.object.response.OtaEvent;
 import com.otakeys.sdk.service.object.response.OtaKey;
 import com.otakeys.sdk.service.object.response.OtaLastVehicleData;
 import com.otakeys.sdk.service.object.response.OtaVehicleData;
-import com.app.MainActivity;
-import com.app.Utils.OTASDKUtils;
 
 import java.util.List;
 

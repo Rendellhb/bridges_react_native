@@ -1,19 +1,18 @@
 package com.app;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import com.app.Utils.OTASDKUtils;
 import com.facebook.react.ReactActivity;
 import com.otakeys.sdk.service.OtaKeysService;
 import com.otakeys.sdk.service.ble.callback.BleListener;
 import com.otakeys.sdk.service.ble.enumerator.BluetoothState;
 import com.otakeys.sdk.service.object.response.OtaOperation;
 import com.otakeys.sdk.service.object.response.OtaState;
-import com.app.Utils.OTASDKUtils;
 
 public class MainActivity extends ReactActivity implements BleListener {
 
