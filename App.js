@@ -410,7 +410,7 @@ export default class App extends Component {
   unnamedAction1WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction1WithRequestVehicleData(JSON.stringify(vehicleData));
+        .unnamedAction1WithRequestVehicleData(JSON.stringify(true));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -420,7 +420,7 @@ export default class App extends Component {
   unnamedAction2WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction2WithRequestVehicleData(JSON.stringify(vehicleData));
+        .unnamedAction2WithRequestVehicleData(JSON.stringify(false));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -430,7 +430,7 @@ export default class App extends Component {
   unnamedAction3WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction3WithRequestVehicleData(JSON.stringify(vehicleData));
+        .unnamedAction3WithRequestVehicleData(JSON.stringify(true));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -440,7 +440,7 @@ export default class App extends Component {
   unnamedAction4WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction4WithRequestVehicleData(JSON.stringify(vehicleData));
+        .unnamedAction4WithRequestVehicleData(JSON.stringify(false));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -450,7 +450,7 @@ export default class App extends Component {
   unnamedAction5WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction5WithRequestVehicleData(JSON.stringify(vehicleData));
+        .unnamedAction5WithRequestVehicleData(JSON.stringify(true));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);
@@ -460,7 +460,7 @@ export default class App extends Component {
   unnamedAction6WithRequestVehicleData() {
     try {
       const result = NativeModules.OTABridge
-        .unnamedAction6WithRequestVehicleData(JSON.stringify(vehicleData));
+        .unnamedAction6WithRequestVehicleData(JSON.stringify(false));
       console.log(`SUCESSO: ${result}`);
     } catch (e) {
       console.log(`ERRO: ${e}`);

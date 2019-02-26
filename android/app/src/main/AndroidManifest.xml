@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.react_native_otakeys">
+    package="com.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
@@ -10,18 +10,18 @@
 
 
     <application
-      android:name=".MainApplication"
+      android:name="com.app.MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme">
         //OTA Requirement
-        <provider android:authorities="com.react_native_otakeys" android:exported="false" android:name="com.activeandroid.content.ContentProvider" />
+        <provider android:authorities="com.app" android:exported="false" android:name="com.activeandroid.content.ContentProvider" />
 
 
         <activity
-        android:name=".MainActivity"
+        android:name="com.app.MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">

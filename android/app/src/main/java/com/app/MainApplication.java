@@ -1,4 +1,4 @@
-package com.react_native_otakeys;
+package com.app;
 
 import android.app.Application;
 import android.app.Notification;
@@ -15,7 +15,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.otakeys.sdk.OtaNotificationInterface;
-import com.react_native_otakeys.bridge.OTABridgePackage;
+import com.app.bridge.OTABridgePackage;
 
 import java.util.Arrays;
 import java.util.List;

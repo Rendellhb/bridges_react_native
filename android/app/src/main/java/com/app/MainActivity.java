@@ -1,4 +1,4 @@
-package com.react_native_otakeys;
+package com.app;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -13,7 +13,7 @@ import com.otakeys.sdk.service.ble.callback.BleListener;
 import com.otakeys.sdk.service.ble.enumerator.BluetoothState;
 import com.otakeys.sdk.service.object.response.OtaOperation;
 import com.otakeys.sdk.service.object.response.OtaState;
-import com.react_native_otakeys.Utils.OTASDKUtils;
+import com.app.Utils.OTASDKUtils;
 
 public class MainActivity extends ReactActivity implements BleListener {
 

@@ -1,4 +1,4 @@
-package com.react_native_otakeys.bridge;
+package com.app.bridge;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;

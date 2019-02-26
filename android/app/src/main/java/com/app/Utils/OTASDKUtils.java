@@ -1,4 +1,4 @@
-package com.react_native_otakeys.Utils;
+package com.app.Utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

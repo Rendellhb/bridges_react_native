@@ -1,4 +1,4 @@
-package com.react_native_otakeys.bridge;
+package com.app.bridge;
 
 import android.content.Context;
 
@@ -43,8 +43,8 @@ import com.otakeys.sdk.service.object.response.OtaEvent;
 import com.otakeys.sdk.service.object.response.OtaKey;
 import com.otakeys.sdk.service.object.response.OtaLastVehicleData;
 import com.otakeys.sdk.service.object.response.OtaVehicleData;
-import com.react_native_otakeys.MainActivity;
-import com.react_native_otakeys.Utils.OTASDKUtils;
+import com.app.MainActivity;
+import com.app.Utils.OTASDKUtils;
 
 import java.util.List;
 
