@@ -811,7 +811,7 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   }
 
   private static void onApiError(Promise promise, HttpStatus httpStatus, ApiCode apiCode) {
-    promise.reject(String.valueOf(httpStatus.ordinal()), apiCode.name());
+    promise.reject(String.valueOf(httpStatus.ordinal()), String.valueOf(apiCode.getReturnCode()));
   }
 
   @Override
