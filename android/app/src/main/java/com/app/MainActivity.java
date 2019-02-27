@@ -4,12 +4,8 @@ import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
 import com.otakeys.sdk.service.OtaKeysService;
-import com.otakeys.sdk.service.ble.callback.BleListener;
-import com.otakeys.sdk.service.ble.enumerator.BluetoothState;
-import com.otakeys.sdk.service.object.response.OtaOperation;
-import com.otakeys.sdk.service.object.response.OtaState;
 
-public class MainActivity extends ReactActivity implements BleListener {
+public class MainActivity extends ReactActivity {
 
   public OtaKeysService mOtaKeysService;
   /**
@@ -32,15 +28,5 @@ public class MainActivity extends ReactActivity implements BleListener {
 
   private OtaKeysService getOtaKeysServicePrivate() {
     return mOtaKeysService;
-  }
-
-  @Override
-  public void onActionPerformed(OtaOperation otaOperation, OtaState otaState) {
-
-  }
-
-  @Override
-  public void onBluetoothStateChanged(BluetoothState bluetoothState, BluetoothState bluetoothState1) {
-
   }
 }

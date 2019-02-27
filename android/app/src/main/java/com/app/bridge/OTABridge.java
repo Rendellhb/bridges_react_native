@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.app.MainActivity;
 import com.app.Utils.OTASDKUtils;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -29,6 +28,7 @@ import com.otakeys.sdk.service.ble.callback.BleConnectionCallback;
 import com.otakeys.sdk.service.ble.callback.BleDisableEngineCallback;
 import com.otakeys.sdk.service.ble.callback.BleDisconnectionCallback;
 import com.otakeys.sdk.service.ble.callback.BleEnableEngineCallback;
+import com.otakeys.sdk.service.ble.callback.BleListener;
 import com.otakeys.sdk.service.ble.callback.BleLockDoorsCallback;
 import com.otakeys.sdk.service.ble.callback.BleScanCallback;
 import com.otakeys.sdk.service.ble.callback.BleUnlockDoorsCallback;
@@ -40,6 +40,7 @@ import com.otakeys.sdk.service.ble.callback.BleUnnamedActionThreeCallback;
 import com.otakeys.sdk.service.ble.callback.BleUnnamedActionTwoCallback;
 import com.otakeys.sdk.service.ble.callback.BleVehicleDataCallback;
 import com.otakeys.sdk.service.ble.enumerator.BleError;
+import com.otakeys.sdk.service.ble.enumerator.BluetoothState;
 import com.otakeys.sdk.service.core.callback.SwitchToKeyCallback;
 import com.otakeys.sdk.service.nfc.callback.LastNfcDataCallback;
 import com.otakeys.sdk.service.nfc.callback.NfcEventCallback;
@@ -48,13 +49,15 @@ import com.otakeys.sdk.service.object.request.OtaSessionRequest;
 import com.otakeys.sdk.service.object.response.OtaEvent;
 import com.otakeys.sdk.service.object.response.OtaKey;
 import com.otakeys.sdk.service.object.response.OtaLastVehicleData;
+import com.otakeys.sdk.service.object.response.OtaOperation;
+import com.otakeys.sdk.service.object.response.OtaState;
 import com.otakeys.sdk.service.object.response.OtaVehicleData;
 
 import java.util.List;
 
 import static android.content.Context.BIND_AUTO_CREATE;
 
-public class OTABridge extends ReactContextBaseJavaModule {
+public class OTABridge extends ReactContextBaseJavaModule implements BleListener {
 
   private static Intent callingIntent;
 
@@ -147,25 +150,25 @@ public class OTABridge extends ReactContextBaseJavaModule {
   /*
     No iOS esse método recebe uma String com o token, não sei qual é o atributo do @OtaSessionRequest
     que representa este token, então vou deixar um snnipet aqui.
+  */
 
-    @ReactMethod
-    public void openSessionWithToken(String token, final Promise promise) {
-      if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-        OtaSessionRequest sessionRequest = new OtaSessionRequest();
-        sessionRequest.<AQUI O ATRIBUTO ONDE VOCES TEM QUE SETAR O TOKEN> = token;
-        getOtaSdk().openSession(sessionRequest, new AuthenticateCallback() {
-          @Override
-          public void onAuthenticated() {
-            promise.resolve(true);
-          }
+  @ReactMethod
+  public void openSessionWithToken(String token, final Promise promise) {
+    if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
+      OtaSessionRequest sessionRequest = new OtaSessionRequest.AccessDeviceBuilder(token).create();
+      getOtaSdk().openSession(sessionRequest, new AuthenticateCallback() {
+        @Override
+        public void onAuthenticated() {
+          promise.resolve(true);
+        }
 
-          @Override
-          public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-            OTABridge.onApiError(promise, httpStatus, apiCode);
-          }
-        });
-      }
-   */
+        @Override
+        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+          OTABridge.onApiError(promise, httpStatus, apiCode);
+        }
+      });
+    }
+  }
 
   // Only Android
   @ReactMethod
@@ -344,8 +347,8 @@ public class OTABridge extends ReactContextBaseJavaModule {
   //Only Android
   @ReactMethod
   public void registerBleEvents(int id, final Promise promise) {
-    if (OTASDKUtils.isSdkReady() && context instanceof MainActivity) {
-      promise.resolve(getOtaSdk().registerBleEvents(id, ((MainActivity) context)));
+    if (OTASDKUtils.isSdkReady()) {
+      promise.resolve(getOtaSdk().registerBleEvents(id, this));
     }
   }
 
@@ -809,5 +812,15 @@ public class OTABridge extends ReactContextBaseJavaModule {
 
   private static void onApiError(Promise promise, HttpStatus httpStatus, ApiCode apiCode) {
     promise.reject(String.valueOf(httpStatus.ordinal()), apiCode.name());
+  }
+
+  @Override
+  public void onActionPerformed(OtaOperation otaOperation, OtaState otaState) {
+
+  }
+
+  @Override
+  public void onBluetoothStateChanged(BluetoothState bluetoothState, BluetoothState bluetoothState1) {
+
   }
 }

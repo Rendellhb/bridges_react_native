@@ -902,6 +902,13 @@ export default class App extends Component {
           <View style={styles.buttonbg}>
             <Button
               color="lightBlue"
+              title="openSessionWithToken"
+              onPress={this.openSessionWithToken}
+            />
+          </View>
+          <View style={styles.buttonbg}>
+            <Button
+              color="lightBlue"
               title="unnamedAction1WithRequestVehicleData"
               onPress={this.unnamedAction1WithRequestVehicleData}
             />
@@ -998,13 +1005,6 @@ export default class App extends Component {
               color="lightBlue"
               title="lastVehicleSynthesisForKeyWithId"
               onPress={this.lastVehicleSynthesisForKeyWithId}
-            />
-          </View>
-          <View style={styles.buttonbg}>
-            <Button
-              color="lightBlue"
-              title="openSessionWithToken"
-              onPress={this.openSessionWithToken}
             />
           </View>
           <View style={styles.buttonbg}>
