@@ -1,7 +1,6 @@
 package com.app.bridge;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
@@ -63,8 +62,6 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
 
   private OtaKeysService mOtaKeysService;
 
-  private Context context;
-
   private ServiceConnection mConnection = new ServiceConnection() {
     @Override
     public void onServiceConnected(ComponentName className, IBinder service) {
@@ -80,7 +77,6 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
 
   OTABridge(ReactApplicationContext reactContext) {
       super(reactContext);
-      context = reactContext;
   }
 
   public static Intent getCallingIntent() {
