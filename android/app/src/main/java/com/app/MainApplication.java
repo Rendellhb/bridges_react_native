@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
+import com.app.bridge.OTABridge;
 import com.app.bridge.OTABridgePackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -23,10 +24,6 @@ import java.util.List;
 public class MainApplication extends Application implements ReactApplication, OtaNotificationInterface {
 
   private Notification notification;
-
-  private final String BLE_CHANNEL_ID = "BLE_CHANNEL_ID";
-
-  private final String BLE_CHANNEL_NAME = "Bluetooth service";
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -62,9 +59,12 @@ public class MainApplication extends Application implements ReactApplication, Ot
   }
 
   private void configureOTASDKNotification(Context context) {
+    String BLE_CHANNEL_ID = "BLE_CHANNEL_ID";
+    String BLE_CHANNEL_NAME = "Bluetooth service";
+
     this.notification = new Notification.Builder(this).build();
 
-    final Intent intent = MainActivity.getCallingIntent();
+    final Intent intent = OTABridge.getCallingIntent();
     intent.addCategory(Intent.CATEGORY_DEFAULT);
     PendingIntent pendingIntent = PendingIntent.getActivity(context,
             NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);

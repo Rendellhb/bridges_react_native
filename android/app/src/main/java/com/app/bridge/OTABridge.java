@@ -1,6 +1,10 @@
 package com.app.bridge;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 
 import com.app.MainActivity;
 import com.app.Utils.OTASDKUtils;
@@ -48,21 +52,40 @@ import com.otakeys.sdk.service.object.response.OtaVehicleData;
 
 import java.util.List;
 
+import static android.content.Context.BIND_AUTO_CREATE;
+
 public class OTABridge extends ReactContextBaseJavaModule {
 
+  private static Intent callingIntent;
+
+  private OtaKeysService mOtaKeysService;
+
   private Context context;
+
+  private ServiceConnection mConnection = new ServiceConnection() {
+    @Override
+    public void onServiceConnected(ComponentName className, IBinder service) {
+      OtaKeysService.SekorBinder binder = (OtaKeysService.SekorBinder) service;
+      mOtaKeysService = binder.getService();
+      OTASDKUtils.setSdkReady(true);
+    }
+    @Override
+    public void onServiceDisconnected(ComponentName arg0) {
+      OTASDKUtils.setSdkReady(false);
+    }
+  };
 
   OTABridge(ReactApplicationContext reactContext) {
       super(reactContext);
       context = reactContext;
   }
 
-  private OtaKeysService getOtaSdk() {
-    if (getCurrentActivity() instanceof  MainActivity) {
-      return ((MainActivity) getCurrentActivity()).getOtaKeysService();
-    }
+  public static Intent getCallingIntent() {
+    return callingIntent != null ? callingIntent : new Intent();
+  }
 
-    return null;
+  private OtaKeysService getOtaSdk() {
+    return mOtaKeysService;
   }
 
   @Override
@@ -80,6 +103,15 @@ public class OTABridge extends ReactContextBaseJavaModule {
       promise.resolve(awesomeText);
     else
       promise.reject("error", "C'mom gimme some text!");
+  }
+
+  @ReactMethod
+  public void startService(Promise promise) {
+    if (!OTASDKUtils.isSdkReady() && getCurrentActivity() != null) {
+      callingIntent = new Intent(getCurrentActivity(), OtaKeysService.class);
+      getCurrentActivity().bindService(callingIntent, mConnection, BIND_AUTO_CREATE);
+      promise.resolve(true);
+    }
   }
 
   //Only Android

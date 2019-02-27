@@ -14,8 +14,11 @@ import {
   View,
   Button,
   ScrollView,
-  NativeModules
+  NativeModules,
+  Platform
 } from 'react-native';
+
+let isAndroidServiceReady = false;
 
 const lastVehicleSynthesis = {
   lastCaptureDate: 1550685803,
@@ -117,21 +120,13 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = { something: '' };
+
+    if (Platform.OS === 'android') this.startService();
   }
 
   async getAccessDeviceToken() {
     try {
       const result = await NativeModules.OTABridge.getAccessDeviceToken();
-      console.log('SUCESSO:');
-      console.log(result);
-    } catch (e) {
-      console.log(`Erro do OTA ${e}`);
-    }
-  }
-
-  async openSessionWithToken() {
-    try {
-      const result = await NativeModules.OTABridge.openSessionWithToken('VCpCTVlS3P535Y7ZpGjE0YGJ91dfgqRA');
       console.log('SUCESSO:');
       console.log(result);
     } catch (e) {
@@ -719,6 +714,16 @@ export default class App extends Component {
     }
   }
 
+  async openSessionWithToken() {
+    try {
+      const result = await NativeModules.OTABridge.openSessionWithToken('VCpCTVlS3P535Y7ZpGjE0YGJ91dfgqRA');
+      console.log('SUCESSO:');
+      console.log(result);
+    } catch (e) {
+      console.log(`Erro do OTA ${e}`);
+    }
+  }
+
   async cleanTokens() {
     try {
       const result = await NativeModules.OTABridge
@@ -764,6 +769,12 @@ export default class App extends Component {
     } catch (e) {
       console.log(`Erro do OTA ${e}`);
     }
+  }
+
+  startService() {
+    NativeModules.OTABridge.startService().then(() => {
+      isAndroidServiceReady = true;
+    });
   }
 
   render() {

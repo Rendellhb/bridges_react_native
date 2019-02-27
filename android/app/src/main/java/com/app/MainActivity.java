@@ -1,12 +1,7 @@
 package com.app;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 
-import com.app.Utils.OTASDKUtils;
 import com.facebook.react.ReactActivity;
 import com.otakeys.sdk.service.OtaKeysService;
 import com.otakeys.sdk.service.ble.callback.BleListener;
@@ -15,8 +10,6 @@ import com.otakeys.sdk.service.object.response.OtaOperation;
 import com.otakeys.sdk.service.object.response.OtaState;
 
 public class MainActivity extends ReactActivity implements BleListener {
-
-  private static Intent callingIntent;
 
   public OtaKeysService mOtaKeysService;
   /**
@@ -31,33 +24,15 @@ public class MainActivity extends ReactActivity implements BleListener {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    if (!OTASDKUtils.isSdkReady()) {
-        callingIntent = new Intent(this, OtaKeysService.class);
-        bindService(callingIntent, mConnection, BIND_AUTO_CREATE);
-    }
   }
 
-  public OtaKeysService getOtaKeysService() {
+  public OtaKeysService getOtaKeysService(MainActivity activity) {
+    return activity.getOtaKeysServicePrivate();
+  }
+
+  private OtaKeysService getOtaKeysServicePrivate() {
     return mOtaKeysService;
   }
-
-  public static Intent getCallingIntent() {
-    return callingIntent != null ? callingIntent : new Intent();
-  }
-
-  private ServiceConnection mConnection = new ServiceConnection() {
-    @Override
-    public void onServiceConnected(ComponentName className, IBinder service) {
-        OtaKeysService.SekorBinder binder = (OtaKeysService.SekorBinder) service;
-        mOtaKeysService = binder.getService();
-        OTASDKUtils.setSdkReady(true);
-    }
-    @Override
-    public void onServiceDisconnected(ComponentName arg0) {
-        OTASDKUtils.setSdkReady(false);
-    }
-  };
 
   @Override
   public void onActionPerformed(OtaOperation otaOperation, OtaState otaState) {
