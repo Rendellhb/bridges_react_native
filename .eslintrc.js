@@ -8,6 +8,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
+    'react/sort-comp': 'off',
     'comma-dangle': 'off',
     'class-methods-use-this': 'off'
   },

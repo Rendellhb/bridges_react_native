@@ -1,5 +1,7 @@
 package com.app.Utils;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapter;
@@ -23,9 +25,26 @@ public class OTASDKUtils {
     return getGson().fromJson(json, OtaSessionRequest.class);
   }
 
-  public static OtaKeyRequest getOtaKeyRequestFromJson(String json) {
+  public static OtaKeyRequest getOtaKeyRequestFromJson(String json, OTAKeyRequestBuilder builderEnum ) {
     Gson gson = getGson();
-    return gson.fromJson(json, OtaKeyRequest.class);
+    OtaKeyRequest keyrequest = gson.fromJson(json, OtaKeyRequest.class);
+
+    switch (builderEnum) {
+      case CREATE_KEY:
+        return buildCreateKey(keyrequest);
+      case ENABLE_KEY:
+        return buildEnableKey(keyrequest);
+      case GENERATE_TOKENS:
+        return buildGenerateTokens(keyrequest);
+      case END_KEY:
+        return buildEndKey(keyrequest);
+      case UPDATE_KEY:
+        return buildUpdateKey(keyrequest);
+      case GET_KEY:
+        return buildGetKey(keyrequest);
+      default:
+        return keyrequest;
+    }
   }
 
   public static OtaKey getOtaKeyFromJson(String json) {
@@ -68,6 +87,77 @@ public class OTASDKUtils {
     return new GsonBuilder()
             .registerTypeAdapter(DateTime.class, new DateLongFormatTypeAdapter())
             .create();
+  }
+
+  private static OtaKeyRequest buildCreateKey(OtaKeyRequest keyrequest) {
+    OtaKeyRequest.CreateKeyBuilder builder = new OtaKeyRequest.CreateKeyBuilder(keyrequest.getEndDate())
+            .setVehicleExtId(keyrequest.getVehicleExtId())
+            .setExtId(keyrequest.getExtId())
+            .setSecurity(keyrequest.getSecurity());
+
+    if (keyrequest.getBeginDate() != null) {
+      builder.setBeginDate(keyrequest.getBeginDate());
+    }
+
+    if (keyrequest.getVehicleId() != null) {
+      builder.setVehicleId(keyrequest.getVehicleId());
+    }
+
+    if (keyrequest.getTokenNbr() != null)
+      builder.setTokenNumber(keyrequest.getTokenNbr());
+
+    if (keyrequest.isEnableNow() != null)
+      builder.setEnableNow(keyrequest.isEnableNow());
+
+    return builder.create();
+  }
+
+  private static OtaKeyRequest buildEnableKey(OtaKeyRequest keyrequest) {
+    OtaKeyRequest.EnableKeyBuilder builder = new OtaKeyRequest.EnableKeyBuilder(keyrequest.getOtaId())
+            .setSecurity(keyrequest.getSecurity());
+
+    if (keyrequest.getTokenNbr() != null)
+      builder.setTokenNumber(keyrequest.getTokenNbr());
+
+    return builder.create();
+  }
+
+  private static OtaKeyRequest buildGenerateTokens(OtaKeyRequest keyrequest) {
+    return new OtaKeyRequest.GenerateVirtualKeys(keyrequest.getOtaId(), keyrequest.getTokenNbr())
+            .setExtId(keyrequest.getExtId())
+            .create();
+
+  }
+
+  private static OtaKeyRequest buildUpdateKey(OtaKeyRequest keyrequest) {
+    OtaKeyRequest.UpdateKeyBuilder builder = new OtaKeyRequest.UpdateKeyBuilder(
+            keyrequest.getOtaId(), keyrequest.getBeginDate(), keyrequest.getEndDate())
+            .setSecurity(keyrequest.getSecurity());
+
+    if (keyrequest.getTokenNbr() != null) {
+      builder.setTokenNumber(keyrequest.getTokenNbr());
+    }
+
+    if (keyrequest.isEnableNow() != null)
+      builder.setEnableNow(keyrequest.isEnableNow());
+
+    return builder.create();
+  }
+
+  private static OtaKeyRequest buildEndKey(OtaKeyRequest keyrequest) {
+    return new OtaKeyRequest.EndKeyBuilder(keyrequest.getOtaId())
+            .create();
+  }
+
+  private static OtaKeyRequest buildGetKey(OtaKeyRequest keyrequest) {
+    OtaKeyRequest.GetKeyBuilder builder = new OtaKeyRequest.GetKeyBuilder()
+            .setExtId(keyrequest.getExtId());
+
+    if (keyrequest.getOtaId() != null) {
+      builder.setOtaId(keyrequest.getOtaId());
+    }
+
+    return builder.create();
   }
 }
 

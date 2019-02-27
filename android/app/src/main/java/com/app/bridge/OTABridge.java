@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.app.Utils.OTAKeyRequestBuilder;
 import com.app.Utils.OTASDKUtils;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -199,17 +200,20 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   @ReactMethod
   public void createKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      getOtaSdk().createKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new CreateKeyCallback() {
-        @Override
-        public void onCreateKey(OtaKey otaKey) {
-          promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
-        }
+      getOtaSdk().createKey(
+              OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson, OTAKeyRequestBuilder.CREATE_KEY),
+              new CreateKeyCallback() {
+                @Override
+                public void onCreateKey(OtaKey otaKey) {
+                  promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
+                }
 
-        @Override
-        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-          OTABridge.onApiError(promise, httpStatus, apiCode);
-        }
-      });
+                @Override
+                public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+                  OTABridge.onApiError(promise, httpStatus, apiCode);
+                }
+              }
+      );
     }
   }
 
@@ -228,17 +232,19 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   @ReactMethod
   public void enableKey(String otaKeyRequestJson, final Promise promise) {
     if(OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      getOtaSdk().enableKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new EnableKeyCallback() {
-        @Override
-        public void onEnableKey(OtaKey otaKey) {
-          promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
-        }
+      getOtaSdk().enableKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson, OTAKeyRequestBuilder.ENABLE_KEY),
+              new EnableKeyCallback() {
+                @Override
+                public void onEnableKey(OtaKey otaKey) {
+                  promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
+                }
 
-        @Override
-        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-          OTABridge.onApiError(promise, httpStatus, apiCode);
-        }
-      });
+                @Override
+                public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+                  OTABridge.onApiError(promise, httpStatus, apiCode);
+                }
+              }
+      );
     }
   }
 
@@ -246,17 +252,19 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   @ReactMethod
   public void generateTokens(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      getOtaSdk().generateVirtualKeys(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new GenerateTokensCallback() {
-        @Override
-        public void onTokensUpdated(OtaKey otaKey) {
-          promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
-        }
+      getOtaSdk().generateVirtualKeys(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson, OTAKeyRequestBuilder.GENERATE_TOKENS),
+              new GenerateTokensCallback() {
+                @Override
+                public void onTokensUpdated(OtaKey otaKey) {
+                  promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
+                }
 
-        @Override
-        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-          OTABridge.onApiError(promise, httpStatus, apiCode);
-        }
-      });
+                @Override
+                public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+                  OTABridge.onApiError(promise, httpStatus, apiCode);
+                }
+              }
+      );
     }
   }
 
@@ -264,17 +272,19 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   @ReactMethod
   public void updateKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      getOtaSdk().updateKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new UpdateKeyCallback() {
-        @Override
-        public void onUpdateKey(OtaKey otaKey) {
-          promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
-        }
+      getOtaSdk().updateKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson, OTAKeyRequestBuilder.UPDATE_KEY),
+              new UpdateKeyCallback() {
+                @Override
+                public void onUpdateKey(OtaKey otaKey) {
+                  promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
+                }
 
-        @Override
-        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-          OTABridge.onApiError(promise, httpStatus, apiCode);
-        }
-      });
+                @Override
+                public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+                  OTABridge.onApiError(promise, httpStatus, apiCode);
+                }
+              }
+      );
     }
   }
 
@@ -282,17 +292,19 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   @ReactMethod
   public void endKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      getOtaSdk().endKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new EndKeyCallback() {
-        @Override
-        public void onEndKey(OtaKey otaKey) {
-          promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
-        }
+      getOtaSdk().endKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson, OTAKeyRequestBuilder.END_KEY),
+              new EndKeyCallback() {
+                @Override
+                public void onEndKey(OtaKey otaKey) {
+                  promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
+                }
 
-        @Override
-        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-          OTABridge.onApiError(promise, httpStatus, apiCode);
-        }
-      });
+                @Override
+                public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+                  OTABridge.onApiError(promise, httpStatus, apiCode);
+                }
+              }
+      );
     }
   }
 
@@ -300,17 +312,19 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
   @ReactMethod
   public void getKey(String otaKeyRequestJson, final Promise promise) {
     if (OTASDKUtils.isSdkReady() && getOtaSdk() != null) {
-      getOtaSdk().getKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson), new GetKeyCallback() {
-        @Override
-        public void onGetKey(OtaKey otaKey) {
-          promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
-        }
+      getOtaSdk().getKey(OTASDKUtils.getOtaKeyRequestFromJson(otaKeyRequestJson, OTAKeyRequestBuilder.GET_KEY),
+              new GetKeyCallback() {
+                @Override
+                public void onGetKey(OtaKey otaKey) {
+                  promise.resolve(OTASDKUtils.getJsonFromOtaKey(otaKey));
+                }
 
-        @Override
-        public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
-          OTABridge.onApiError(promise, httpStatus, apiCode);
-        }
-      });
+                @Override
+                public void onApiError(HttpStatus httpStatus, ApiCode apiCode) {
+                  OTABridge.onApiError(promise, httpStatus, apiCode);
+                }
+              }
+      );
     }
   }
 

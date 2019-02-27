@@ -87,7 +87,8 @@ const otaKeyRequest = {
   enableNow: true,
   tokenAmount: '16',
   singleShotSecurity: true,
-  security: 'token'
+  security: 'token',
+  tokenNbr: 1235
 };
 
 const otaKeyPublic = {
@@ -182,7 +183,12 @@ export default class App extends Component {
 
   async createKey() {
     try {
-      const result = await NativeModules.OTABridge.createKey(JSON.stringify(otaKeyRequest));
+      const booking = {
+        beginDate: parseInt((new Date()).getTime().toString().substring(0, 10)) + 2,
+        endDate: parseInt((new Date()).getTime().toString().substring(0, 10)) + 4000,
+        vehicleId: '13404',
+      };
+      const result = await NativeModules.OTABridge.createKey(JSON.stringify(booking));
       App.success(result);
     } catch (e) {
       App.errors(e);
