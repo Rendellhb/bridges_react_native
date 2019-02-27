@@ -62,16 +62,26 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
 
   private OtaKeysService mOtaKeysService;
 
+  private Promise promise;
+
   private ServiceConnection mConnection = new ServiceConnection() {
     @Override
     public void onServiceConnected(ComponentName className, IBinder service) {
       OtaKeysService.SekorBinder binder = (OtaKeysService.SekorBinder) service;
       mOtaKeysService = binder.getService();
       OTASDKUtils.setSdkReady(true);
+      if (promise != null) {
+        promise.resolve(true);
+        promise = null;
+      }
     }
     @Override
     public void onServiceDisconnected(ComponentName arg0) {
       OTASDKUtils.setSdkReady(false);
+      if (promise != null) {
+        promise.resolve(false);
+        promise = null;
+      }
     }
   };
 
@@ -106,10 +116,10 @@ public class OTABridge extends ReactContextBaseJavaModule implements BleListener
 
   @ReactMethod
   public void startService(Promise promise) {
-    if (!OTASDKUtils.isSdkReady() && getCurrentActivity() != null) {
+    if (!OTASDKUtils.isSdkReady() && getCurrentActivity() != null && this.promise == null) {
+      this.promise = promise;
       callingIntent = new Intent(getCurrentActivity(), OtaKeysService.class);
       getCurrentActivity().bindService(callingIntent, mConnection, BIND_AUTO_CREATE);
-      promise.resolve(true);
     }
   }
 
