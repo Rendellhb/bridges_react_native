@@ -34,7 +34,7 @@ RCT_EXPORT_METHOD(openSessionWithToken: (NSString *) token
                                         resolve(@YES);
                                       }
                                       failure:^(OTAErrorCode errorCode, NSError *error) {
-                                        reject(@"Error", @"Error opening session", error);
+                                        reject(@"Error", [NSString stringWithFormat:@"%li", errorCode], error);
                                       }];
 }
 
@@ -190,7 +190,7 @@ RCT_EXPORT_METHOD(endKeyWithId: (NSString *) keyID
     NSString *jsonresult = [utils convertObjectToJson:treatedDic];
     resolve(jsonresult);
   } failure:^(OTAErrorCode otaErrorCode, NSError *error) {
-    reject(@"Error", [NSString stringWithFormat:@"Error ending key with id: %li", otaErrorCode], error);
+    reject(@"Error", [NSString stringWithFormat:@"%li", otaErrorCode], error);
   }];
 }
 
@@ -210,7 +210,7 @@ RCT_EXPORT_METHOD(keysWithSuccess: (RCTPromiseResolveBlock)resolve
     NSString *json = [utils getJsonFromNSArray: dicArray];
     resolve(json);
   } failure:^(OTAErrorCode otaErrorCode, NSError *error) {
-    reject(@"Error", [NSString stringWithFormat:@"Error keys without success: %li", otaErrorCode], error);
+    reject(@"Error", [NSString stringWithFormat:@"%li", otaErrorCode], error);
   }];
 }
 
@@ -521,7 +521,7 @@ RCT_EXPORT_METHOD(syncVehicleDataWithSuccess: (RCTPromiseResolveBlock)resolve
   [[OTAManager instance] syncVehicleDataWithSuccess:^(BOOL success){
     resolve (@YES);
   } failure:^(OTAErrorCode otaErrorCode, NSError *error) {
-    reject(@"Error", [NSString stringWithFormat: @"Unable to sync vehicle data: %li", (long)otaErrorCode], error);
+    reject(@"Error", [NSString stringWithFormat: @"%li", otaErrorCode], error);
   }];
 }
 
